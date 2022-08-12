@@ -1,7 +1,30 @@
 // Body
-$body-bg: #f8fafc;
+$body-bg: #000000;
 
+html{
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+body{
+    position: absolute !important;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    background-color: black;
+    position: relative;
+}
 // Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+//$font-family-sans-serif: 'Nunito', sans-serif;
+//$font-size-base: 0.9rem;
+//$line-height-base: 1.6;
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    src: url("/css/fonts/Inter.ttf") format("truetype");
+}

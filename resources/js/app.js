@@ -19,7 +19,9 @@ window.Vue = require('vue').default;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('navbar-l', require('./components/navbar_l.vue').default);
+Vue.component('navbar-r', require('./components/navbar_r.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -27,6 +29,19 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
-});
+// const app = new Vue({
+//     el: '#app',
+// });
+
+var vm = new Vue({
+    //el: "#navbar-l",
+    data: {
+
+    }
+}).$mount('#navbar-l');
+var vm = new Vue({
+    //el: "#navbar-l",
+    data: {
+
+    }
+}).$mount('#navbar-r');
