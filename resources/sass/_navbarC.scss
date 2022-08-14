@@ -3,14 +3,14 @@
     position: relative;
     width: fit-content;
     height: fit-content;
-    padding: 13px 24px;
+    padding: 1vw 1.8vw;
     background: #794DFD;
-    border-radius: 20px;
+    border-radius: 1.2vw;
     color: white;
     margin: 0.5vw;
     font:{
-        size: 2vmin;
-        family: "Inter";
-        weight: 500;
+        size: 0.9vw;
+        weight: 300;
     }
+    cursor: pointer;
 }

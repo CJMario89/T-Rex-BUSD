@@ -14,8 +14,22 @@ body{
     height: 100%;
     width: 100%;
     margin: 0 auto;
-    background-color: black;
+    background-color: #1E1E1E;;
     position: relative;
+    font-family: "Inter";
+}
+
+.visible{
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+.hidden{
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+.spin180{
+    transform: rotateX(180deg) !important;
 }
 // Typography
 //$font-family-sans-serif: 'Nunito', sans-serif;

@@ -12,10 +12,5 @@ export default {
 }
 </script>
 <style lang="scss">
-    .navbarL{
-        display: block;
-        position: absolute;
-        top: 2vw;
-        left: 2vw;
-    }
+   
 </style>

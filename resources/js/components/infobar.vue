@@ -1,0 +1,66 @@
+<template>
+    <div class="infobar">
+        <div class="infobarC">
+            <span>CONTRACT BALANCE</span>
+            <span>{{contract_balance}}BUSD</span>
+        </div>
+        <div class="infobarC">
+            <span>DAILY ROI</span>
+            <span>{{daily_roi}}%</span>
+        </div>
+        <div class="infobarC">
+            <span>WITHDRAW FEE</span>
+            <span>{{withdraw_fee}}%</span>
+        </div>
+        <div class="infobarC">
+            <span>DEPOSIT FEE</span>
+            <span>MARKET{{deposit_fee_market}}% + DEV{{deposit_fee_dev}}%</span>
+        </div>
+    </div>
+</template>
+<script>
+export default {
+    data: function(){
+        return {
+            contract_balance: '',
+            daily_roi: 10,
+            withdraw_fee: 2,
+            deposit_fee_market: 4,
+            deposit_fee_dev: 2
+        }
+    }
+}
+</script>
+<style lang="scss">
+    .infobar{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-content: center;
+        position: relative;
+        color: white;
+        font-size: 1.6vw;
+        font-weight: 600;
+        width: 96%;
+        margin: 2%;
+    }
+
+    .infobarC{
+        width: 23%;
+        margin: 0.5%;
+        background: #794DFD;
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        justify-content: space-around;
+        align-content: space-around;
+        border-radius: 0.6vw;
+        padding: 1%;
+        span{
+            margin: 0.5vw;
+            text-align: center;
+            vertical-align: middle;
+        }
+    }
+    
+</style>

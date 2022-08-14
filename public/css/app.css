@@ -1,4 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);
 html {
   height: 100%;
   width: 100%;
@@ -12,8 +11,23 @@ body {
   height: 100%;
   width: 100%;
   margin: 0 auto;
-  background-color: black;
+  background-color: #1E1E1E;
   position: relative;
+  font-family: "Inter";
+}
+
+.visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+.spin180 {
+  transform: rotateX(180deg) !important;
 }
 
 @font-face {
@@ -31,12 +45,76 @@ body {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  padding: 13px 24px;
+  padding: 1vw 1.8vw;
   background: #794DFD;
-  border-radius: 20px;
+  border-radius: 1.2vw;
   color: white;
   margin: 0.5vw;
-  font-size: 2vmin;
-  font-family: "Inter";
-  font-weight: 500;
+  font-size: 0.9vw;
+  font-weight: 300;
+  cursor: pointer;
+}
+
+.MBTitle {
+  display: block;
+  font-size: 1.3vw;
+  font-weight: 600;
+  color: white;
+  width: calc(100% - 1vw);
+  margin-left: 1vw;
+}
+
+.MBContent {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  width: calc(100% - 2vw);
+  padding: 1vw;
+  padding-top: 2vw;
+  padding-bottom: 1.5vw;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  font-size: 1.2vw;
+  font-weight: 600;
+}
+
+.MBContent::before {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 1px;
+  background-color: #FAF1F1;
+  opacity: 0.5;
+}
+
+.MBC {
+  display: block;
+  padding-top: 1vw;
+  padding-bottom: 1vw;
+}
+
+.button {
+  background-color: black;
+  border-radius: 0.5vw;
+  color: white;
+  font-size: 1.3vw;
+  font-weight: 700;
+  padding: 1vw 2vw;
+}
+
+.inputBlock {
+  width: 13vw;
+  background-color: #D1D3E8;
+  border-radius: 0.5vw;
+  color: #642F8E;
+  font-size: 1.3vw;
+  font-weight: 700;
+  padding: 0.6vw 1vw;
 }

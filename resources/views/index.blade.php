@@ -4,12 +4,52 @@
         #navbar{
             display: block;
             width: 100%;
+            position: relative;
+            height: 9vw;
         }
         #navbar-l{
             display: inline-block;
+            top: 2vw;
+            left: 1.5vw;
+            position: absolute;
         }
         #navbar-r{
             display: inline-block;
+            top: 2vw;
+            right: 1.5vw;
+            position: absolute;
+        }
+        #infobar{
+            display: block;
+            position: relative;
+            width: 100%;
+        }
+        #middleBlock{
+            display: flex;
+            position: relative;
+            flex-direction: row;
+            justify-content: space-around;
+            margin: 2%;
+            width: 96%;
+            height: 44.75vw;
+        }
+        #investment-portal{
+            display: block;
+            position: relative;
+            margin: 0.5%;
+            width: 34%;
+        }
+        #statistics{
+            display: block;
+            position: relative;
+            margin: 0.5%;
+            width: 32%;
+        }
+        #referral{
+            display: block;
+            position: relative;
+            margin: 0.5%;
+            width: 30%;
         }
     </style>
 @endsection
@@ -21,6 +61,20 @@
         </div>
         <div id= "navbar-r">
             <navbar-r></navbar-r>
+        </div>
+    </div>
+    <div id= "infobar">
+        <infobar></infobar>
+    </div>
+    <div id= "middleBlock">
+        <div id="investment-portal">
+            <investment-portal></investment-portal>
+        </div>
+        <div id="statistics">
+            <statistics></statistics>
+        </div>
+        <div id="referral">
+            <referral></referral>
         </div>
     </div>
 @endsection
@@ -56,11 +110,5 @@
             const abi = await raw_abi.json();
             token = await new web3.eth.Contract(abi, BUSD_Address);
         }
-
-        window.addEventListener("load", async function(){
-            await web3_init();
-            await createContract();
-            await createToken();
-        });
     </script>
 @endsection

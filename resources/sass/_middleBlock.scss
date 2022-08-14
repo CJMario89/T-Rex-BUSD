@@ -1,0 +1,58 @@
+.MBTitle{
+    display: block;
+    font-size: 1.3vw;
+    font-weight: 600;
+    color: white;
+    width: calc(100% - 1vw);
+    margin-left: 1vw;
+}
+
+.MBContent{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    width: calc(100% - 2vw);
+    padding: 1vw;
+    padding-top: 2vw;
+    padding-bottom: 1.5vw;
+    height: max-content;
+    font-size: 1.2vw;
+    font-weight: 600;
+}
+.MBContent::before{
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 1px;
+    background-color: #FAF1F1;
+    opacity: 0.5;
+}
+.MBC{
+    display: block;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+}
+.button{
+    background-color: black;
+    border-radius: 0.5vw;
+    color: white;
+    font-size: 1.3vw;
+    font-weight: 700;
+    padding: 1vw 2vw;
+}
+
+.inputBlock{
+    width: 13vw;
+    background-color: #D1D3E8;
+    border-radius: 0.5vw;
+    color: #642F8E;
+    font-size: 1.3vw;
+    font-weight: 700;
+    padding: 0.6vw 1vw;
+}
