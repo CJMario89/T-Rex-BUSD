@@ -22,7 +22,7 @@
                 REFERRAL LINK
             </div>
             <div class="MBContent referralContent" style="padding-top:1vw;padding-bottom: 0vw;">
-                <input class="inputBlock" type="text" value="https://t-rexbusd/?ref=0x00" style="width:100%;">
+                <input class="inputBlock" type="text" value="https://t-rexbusd/?ref=0x00" style="width:100%;" disabled>
             </div>
             <div class="MBContent referralContent" style="justify-content:center;padding-top:1vw;padding-bottom: 0vw;">
                 <div class="button">

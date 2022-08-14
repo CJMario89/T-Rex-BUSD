@@ -32,7 +32,7 @@ export default {
             "p5": {"left": "<span>5x Profit</span>", "right": `<span>${profit_5x}</span>`},
             "r5": {"left": "<span>5x Remaining</span>", "right": `<span>${remaining_5x}</span>`},
             "dur": {"left": "<span>Daily User ROI</span>", "right": `<span>${daily_user_roi}</span>`},
-            "apr": {"left": "<input type='text' class='inputBlock' placeholder='BUSD'>", "right": `<div class='button'>APPROVE</div>`}
+            "apr": {"left": "<input type='text' class='inputBlock' placeholder='BUSD' value='50'>", "right": `<div class='button'>APPROVE</div>`}
 
         };
     },
@@ -45,7 +45,7 @@ export default {
                 "p5": {"left": "<span>5x Profit</span>", "right": `<span>${profit_5x}</span>`},
                 "r5": {"left": "<span>5x Remaining</span>", "right": `<span>${remaining_5x}</span>`},
                 "dur": {"left": "<span>Daily User ROI</span>", "right": `<span>${daily_user_roi}</span>`},
-                "apr": {"left": "<input type='text' class='inputBlock' placeholder='BUSD'>", "right": `<div class='button'>APPROVE</div>`}
+                "apr": {"left": "<input type='number' class='inputBlock' placeholder='BUSD' value='50'>", "right": `<div class='button'>APPROVE</div>`}
             };
         }
     }

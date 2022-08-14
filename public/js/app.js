@@ -5266,7 +5266,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      f2Text: ["StarStone Miner contract is public, verified and can be viewed here on BscScan.", "T-REX Miner pays 10% daily, according to the current mining efficiency rate. The mining efficiency rate rises and falls as you and other players hire miners, compound earnings and pocket BUSD.", "T-REX Miner pays a modest 10% daily, allowing investors to rest easy knowing that their investments have unlimited growth potential and a maximum, improbable risk of less than 10%."]
+    };
+  }
+});
 
 /***/ }),
 
@@ -5306,13 +5312,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-var daily_return = 0,
-    weekly_return = 0,
-    monthly_return = 0;
+var daily_return = 5,
+    weekly_return = 35,
+    monthly_return = 150;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      returns: {}
+      returns: {},
+      ICInput: 50
     };
   },
   created: function created() {
@@ -5321,6 +5328,24 @@ var daily_return = 0,
       "Weekly": weekly_return,
       "Monthly": monthly_return
     };
+  },
+  methods: {
+    onChangeICInput: function onChangeICInput() {
+      var amount = 50;
+
+      if (this.ICInput != "") {
+        amount = this.ICInput;
+      }
+
+      daily_return = parseFloat(parseFloat(amount / 10).toPrecision(12));
+      weekly_return = parseFloat(parseFloat(amount / 10 * 7).toPrecision(12));
+      monthly_return = parseFloat(parseFloat(amount / 10 * 30).toPrecision(12));
+      this.returns = {
+        "Daily": daily_return,
+        "Weekly": weekly_return,
+        "Monthly": monthly_return
+      };
+    }
   }
 });
 
@@ -5384,7 +5409,7 @@ var wallet_balance = 0,
                   "right": "<span>".concat(daily_user_roi, "</span>")
                 },
                 "apr": {
-                  "left": "<input type='text' class='inputBlock' placeholder='BUSD'>",
+                  "left": "<input type='text' class='inputBlock' placeholder='BUSD' value='50'>",
                   "right": "<div class='button'>APPROVE</div>"
                 }
               };
@@ -5428,7 +5453,7 @@ var wallet_balance = 0,
           "right": "<span>".concat(daily_user_roi, "</span>")
         },
         "apr": {
-          "left": "<input type='text' class='inputBlock' placeholder='BUSD'>",
+          "left": "<input type='number' class='inputBlock' placeholder='BUSD' value='50'>",
           "right": "<div class='button'>APPROVE</div>"
         }
       };
@@ -5629,7 +5654,22 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _vm._m(0);
+  return _c("div", {
+    staticClass: "footerBlock"
+  }, [_vm._m(0), _vm._v(" "), _c("div", {
+    staticClass: "f2"
+  }, _vm._l(_vm.f2Text, function (item) {
+    return _c("div", {
+      key: item,
+      staticClass: "f2Text"
+    }, [_c("div", {
+      staticClass: "f2TextTitle"
+    }, [_vm._v("\n                Verified Public Contract\n            ")]), _vm._v(" "), _c("div", {
+      staticClass: "f2TextContent"
+    }, [_vm._v("\n                " + _vm._s(item) + "\n            ")])]);
+  }), 0), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("div", {
+    staticClass: "copyright"
+  }, [_vm._v("\n        © Copyright StarStone BUSD Miner 2022 . All Rights Reserved \n    ")])]);
 };
 
 var staticRenderFns = [function () {
@@ -5637,8 +5677,6 @@ var staticRenderFns = [function () {
       _c = _vm._self._c;
 
   return _c("div", {
-    staticClass: "footerBlock"
-  }, [_c("div", {
     staticClass: "f1"
   }, [_c("div", {
     staticClass: "f1Img1"
@@ -5654,7 +5692,18 @@ var staticRenderFns = [function () {
     attrs: {
       src: "/images/T2.png"
     }
-  })])])]);
+  })])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
+    staticClass: "warning"
+  }, [_c("span", {
+    staticStyle: {
+      color: "#F3B515"
+    }
+  }, [_vm._v("WARNING:")]), _vm._v(" High-reward products mean high risk. Please evaluate your own financial situation and fund allocation before investing"), _c("br"), _vm._v("\n        The funds invested in StarStone are irretrievable, and the recovery channel is the daily interest bonus income. Please DYOR and Follow us to make money.\n    ")]);
 }];
 render._withStripped = true;
 
@@ -5718,7 +5767,31 @@ var render = function render() {
     staticClass: "ICTitle"
   }, [_vm._v("\n        INVESTMENT CALCULATOR\n    ")]), _vm._v(" "), _c("div", {
     staticClass: "ICContent"
-  }, [_vm._m(0), _vm._v(" "), _c("div", {
+  }, [_c("div", [_c("div", {
+    staticClass: "ICInputTitle"
+  }, [_vm._v("\n                BUSD AMOUNT\n            ")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.ICInput,
+      expression: "ICInput"
+    }],
+    staticClass: "ICInput inputBlock",
+    attrs: {
+      type: "number",
+      placeholder: "50",
+      value: "50"
+    },
+    domProps: {
+      value: _vm.ICInput
+    },
+    on: {
+      input: [function ($event) {
+        if ($event.target.composing) return;
+        _vm.ICInput = $event.target.value;
+      }, _vm.onChangeICInput]
+    }
+  }), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _c("div", {
     staticStyle: {
       "padding-right": "5vw"
     }
@@ -5736,16 +5809,9 @@ var staticRenderFns = [function () {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_c("div", {
-    staticClass: "ICInputTitle"
-  }, [_vm._v("\n                BUSD AMOUNT\n            ")]), _vm._v(" "), _c("input", {
-    staticClass: "ICInput inputBlock",
-    attrs: {
-      type: "text"
-    }
-  }), _vm._v(" "), _c("div", {
+  return _c("div", {
     staticClass: "ICInputDes"
-  }, [_vm._v("\n                Amount of returns calculated on the basis of investment amount."), _c("br"), _vm._v("\n                Note: Min investment is 50 BUSD & max amount of investment in 100k BUSD.\n            ")])]);
+  }, [_vm._v("\n                Amount of returns calculated on the basis of investment amount."), _c("br"), _vm._v("\n                Note: Min investment is 50 BUSD & max amount of investment in 100k BUSD.\n            ")]);
 }];
 render._withStripped = true;
 
@@ -6013,7 +6079,8 @@ var staticRenderFns = [function () {
     },
     attrs: {
       type: "text",
-      value: "https://t-rexbusd/?ref=0x00"
+      value: "https://t-rexbusd/?ref=0x00",
+      disabled: ""
     }
   })]), _vm._v(" "), _c("div", {
     staticClass: "MBContent referralContent",
@@ -11435,7 +11502,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".f1 {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  align-items: center;\n  width: 80vw;\n  margin: 0 auto;\n  margin-top: 2vw;\n}\n.f1Img1 {\n  width: 25vw;\n}\n.f1Img1 img {\n  width: 100%;\n  height: auto;\n}\n.f1Text {\n  color: #FFF7FF;\n  font-weight: 900;\n  font-size: 2vw;\n  white-space: pre-line;\n}\n.f1Img2 {\n  width: 25vw;\n}\n.f1Img2 img {\n  width: 100%;\n  height: auto;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".f1 {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  align-items: center;\n  width: 80vw;\n  margin: 0 auto;\n  margin-top: 6vw;\n}\n.f1Img1 {\n  width: 25vw;\n}\n.f1Img1 img {\n  width: 100%;\n  height: auto;\n}\n.f1Text {\n  color: #FFF7FF;\n  font-weight: 900;\n  font-size: 2vw;\n  white-space: pre-line;\n}\n.f1Img2 {\n  width: 25vw;\n}\n.f1Img2 img {\n  width: 100%;\n  height: auto;\n}\n.f2 {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  align-items: flex-start;\n  width: 94vw;\n  margin: 0 auto;\n}\n.f2Text {\n  width: 28.4vw;\n}\n.f2TextTitle {\n  color: #FB68FB;\n  font-size: 1.2vw;\n  font-weight: 700;\n  padding: 1vw;\n  padding-left: 0vw;\n}\n.f2TextContent {\n  color: #FFFBFF;\n  font-size: 1vw;\n  font-weight: 300;\n  line-height: 1.3vw;\n}\n.warning {\n  color: #FFFBFF;\n  display: block;\n  background-color: #232549;\n  font-size: 0.9vw;\n  line-height: 1.2vw;\n  padding: 0.5vw 2vw;\n  width: -webkit-fit-content;\n  width: -moz-fit-content;\n  width: fit-content;\n  margin: 0 auto;\n  margin-top: 8vw;\n  opacity: 0.8;\n  border-radius: 0.6vw;\n}\n.copyright {\n  color: #D335E4;\n  display: block;\n  margin: 0 auto;\n  text-align: center;\n  margin-top: 1vw;\n  opacity: 0.7;\n  font-size: 0.9vw;\n  padding-bottom: 8vw;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
