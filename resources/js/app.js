@@ -26,6 +26,8 @@ Vue.component('infobar', require('./components/infobar.vue').default);
 Vue.component('investment-portal', require('./components/investmentPortal.vue').default);
 Vue.component('statistics', require('./components/statistics.vue').default);
 Vue.component('referral', require('./components/referral.vue').default);
+Vue.component('investment-calculator', require('./components/investmentCalculator.vue').default);
+Vue.component('footer-block', require('./components/footerBlock.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -69,3 +71,15 @@ var referral = new Vue({
 
     }
 }).$mount('#referral');
+
+var investmentCalculator = new Vue({
+    data: {
+
+    }
+}).$mount('#investment-calculator');
+
+var footerBlock = new Vue({
+    data: {
+
+    }
+}).$mount('#footer-block');

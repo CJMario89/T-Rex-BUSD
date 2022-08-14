@@ -4,17 +4,54 @@
             <div class="MBTitle referralTitle">
                 REFERRAL REWARDS 12%
             </div>
+            <div class="MBContent referralContent" v-for="(items, key) in referral" :key="key">
+                <div v-html="items.left"></div>
+                <div v-html="items.right"></div>
+            </div>
+            <div class="MBContent referralContent" style="justify-content:center;">
+                <div class="button">
+                    WITHDRAW REWARDS
+                </div>
+            </div>
         </div>
         <div class="referralL">
+            <div class="referralHint">
+                EARN<span style="color:#F0BF13;">12%</span>!!
+            </div>
             <div class="MBTitle referralTitle">
                 REFERRAL LINK
+            </div>
+            <div class="MBContent referralContent" style="padding-top:1vw;padding-bottom: 0vw;">
+                <input class="inputBlock" type="text" value="https://t-rexbusd/?ref=0x00" style="width:100%;">
+            </div>
+            <div class="MBContent referralContent" style="justify-content:center;padding-top:1vw;padding-bottom: 0vw;">
+                <div class="button">
+                    COPY LINK
+                </div>
+            </div>
+            <div class="referralDes">
+                You Can Earn BUSD Tokens for inviting new users to join us.
+                The StarStone Miner contract has a direct, 
+                one-level referral system That Rewards Referrer when invited users deposit their tokens. 
+                Promote your referral link and Earn <span style="color:#F0BF13;">12%</span> Referral Rewards.
             </div>
         </div>
     </div>
 </template>
 <script>
+var referral_reward = 0, total_referral_withdrawn = 0;
 export default {
-    
+    data() {
+        return {
+            referral:{}
+        }
+    },
+    created() {
+        this.referral = {
+            "rr": {"left": "Referral Reward", "right": `${referral_reward}&ensp;BUSD`},
+            "trw": {"left": "Total Withdrawn", "right": `${total_referral_withdrawn}&ensp;BUSD`}
+        }
+    },
 }
 </script>
 <style lang="scss">
@@ -28,18 +65,28 @@ export default {
     .referralR{
         display: block;
         width: calc(100% - 2vw);
-        height: 40%;
+        height: 38%;
         border-radius: 0.6vw;
         padding: 2vw 1vw;
         background: #794DFD;
     }
     .referralL{
         display: block;
+        position: relative;
         width: calc(100% - 2vw);
-        height: 39%;
+        height: 37%;
         border-radius: 0.6vw;
         padding: 2vw 1vw;
         background: #794DFD;
+    }
+    .referralHint{
+        display: block;
+        position: absolute;
+        top: 2vw;
+        right: 1vw;
+        color: white;
+        font-size: 1.3vw;
+        font-weight: 700;
     }
     .referralTitle{
         position: relative;
@@ -55,5 +102,18 @@ export default {
         width: calc(100% + 1vw);
         opacity: 0.5;
         background-color: #FAF1F1;
+    }
+    .referralContent{
+        padding-bottom: 1vw;
+    }
+    .referralContent::before{
+        display: none !important;
+    }
+    .referralDes{
+        color: #F2EAEA;
+        font-size: 0.7vw;
+        font-weight: 700;
+        margin-top: 1vw;
+        line-height: 1.1vw;
     }
 </style>

@@ -5,18 +5,18 @@
             display: block;
             width: 100%;
             position: relative;
-            height: 9vw;
+            height: 7vw;
         }
         #navbar-l{
             display: inline-block;
             top: 2vw;
-            left: 1.5vw;
+            left: 2%;
             position: absolute;
         }
         #navbar-r{
             display: inline-block;
             top: 2vw;
-            right: 1.5vw;
+            right: 2%;
             position: absolute;
         }
         #infobar{
@@ -31,25 +31,31 @@
             justify-content: space-around;
             margin: 2%;
             width: 96%;
-            height: 44.75vw;
+            height: 44vw;
         }
         #investment-portal{
             display: block;
             position: relative;
-            margin: 0.5%;
-            width: 34%;
+            margin: 1%;
+            width: 32%;
         }
         #statistics{
             display: block;
             position: relative;
-            margin: 0.5%;
-            width: 32%;
+            margin: 1%;
+            width: 30%;
         }
         #referral{
             display: block;
             position: relative;
-            margin: 0.5%;
+            margin: 1%;
             width: 30%;
+        }
+        #investment-calculator{
+            display: block;
+            position: relative;
+            margin: 2%;
+            width: 96%;
         }
     </style>
 @endsection
@@ -76,6 +82,12 @@
         <div id="referral">
             <referral></referral>
         </div>
+    </div>
+    <div id="investment-calculator">
+        <investment-calculator></investment-calculator>
+    </div>
+    <div id="footer-block">
+        <footer-block></footer-block>
     </div>
 @endsection
 

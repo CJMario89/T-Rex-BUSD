@@ -10,9 +10,9 @@
             <label>
                 EN<input type="radio" value="EN" v-model="language">
             </label>
-            <label>
+            <!-- <label>
                 中文<input type="radio" value="中文" v-model="language">
-            </label>
+            </label> -->
         </div>
         <a class="navbarC">Telegram</a>
         <a class="navbarC" v-on:click="connect_wallet">CONNECT WALLET</a>
@@ -53,8 +53,11 @@ export default {
 </script>
 <style lang="scss">
     .navbarR{
-        display: block;
+        display: flex;
+        flex-direction: row;
         position: relative;
+        justify-content: flex-start;
+        align-items: center;
     }
     .language{
         display: inline-block;
@@ -86,6 +89,8 @@ export default {
         font-size: 0.9vw;
         width: 8vw;
         color: white;
+        left: -1.8vw;
+        top: 3.6vw;
         label{
             display: block;
             padding: 0.5vw;

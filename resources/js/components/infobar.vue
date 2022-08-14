@@ -14,7 +14,7 @@
         </div>
         <div class="infobarC">
             <span>DEPOSIT FEE</span>
-            <span>MARKET{{deposit_fee_market}}% + DEV{{deposit_fee_dev}}%</span>
+            <span>MARKET {{deposit_fee_market}}% + DEV {{deposit_fee_dev}}%</span>
         </div>
     </div>
 </template>
@@ -39,15 +39,15 @@ export default {
         align-content: center;
         position: relative;
         color: white;
-        font-size: 1.6vw;
+        font-size: 1.55vw;
         font-weight: 600;
         width: 96%;
         margin: 2%;
     }
 
     .infobarC{
-        width: 23%;
-        margin: 0.5%;
+        width: 20%;
+        margin: 1%;
         background: #794DFD;
         display: flex;
         position: relative;
@@ -58,6 +58,8 @@ export default {
         padding: 1%;
         span{
             margin: 0.5vw;
+            margin-left: 0vw;
+            margin-right: 0vw;
             text-align: center;
             vertical-align: middle;
         }
