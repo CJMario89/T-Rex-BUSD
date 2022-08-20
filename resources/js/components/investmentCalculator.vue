@@ -8,7 +8,7 @@
                 <div class="ICInputTitle">
                     BUSD AMOUNT
                 </div>
-                <input class="ICInput inputBlock" type="number" placeholder="50" value="50" v-on:input="onChangeICInput" v-model="ICInput">
+                <input class="ICInput inputBlock" type="number" placeholder="50" v-on:input="onChangeICInput" v-model="ICInput">
                 <div class="ICInputDes">
                     Amount of returns calculated on the basis of investment amount.<br>
                     Note: Min investment is 50 BUSD & max amount of investment in 100k BUSD.
@@ -51,9 +51,9 @@ export default {
             weekly_return = parseFloat(parseFloat(amount / 10 * 7).toPrecision(12));
             monthly_return = parseFloat(parseFloat(amount / 10 * 30).toPrecision(12));
             this.returns = {
-                "Daily": daily_return,
-                "Weekly": weekly_return,
-                "Monthly": monthly_return
+                Daily: daily_return,
+                Weekly: weekly_return,
+                Monthly: monthly_return
             }
         }
     },

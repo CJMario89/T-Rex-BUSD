@@ -24,7 +24,7 @@ export default {
         return {
             contract_balance: '',
             daily_roi: 10,
-            withdraw_fee: 2,
+            withdraw_fee: 6,
             deposit_fee_market: 4,
             deposit_fee_dev: 2
         }

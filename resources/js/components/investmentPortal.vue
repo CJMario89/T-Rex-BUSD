@@ -25,28 +25,26 @@ export default {
         }
     },
     created: async function(){
-        
         this.investment_portal = {
-            "wb": {"left": "<span>Wallet Balance</span>", "right": `<span>${wallet_balance}</span>`},
-            "ui": {"left": "<span>User Invested</span>", "right": `<span>${user_invested}</span>`},
-            "p5": {"left": "<span>5x Profit</span>", "right": `<span>${profit_5x}</span>`},
-            "r5": {"left": "<span>5x Remaining</span>", "right": `<span>${remaining_5x}</span>`},
-            "dur": {"left": "<span>Daily User ROI</span>", "right": `<span>${daily_user_roi}</span>`},
-            "apr": {"left": "<input type='text' class='inputBlock' placeholder='BUSD' value='50'>", "right": `<div class='button'>APPROVE</div>`}
-
-        };
+            "WB":{left: "<span>Wallet Balance</span>", right: `<span>${wallet_balance}</span>`},
+            "UI":{left: "<span>User Invested</span>", right: `<span>${user_invested}</span>`},
+            "P5X":{left: "<span>5x Profit</span>", right: `<span>${profit_5x}</span>`},
+            "R5X":{left: "<span>5x Remaining</span>", right: `<span>${remaining_5x}</span>`},
+            "DUR":{left: "<span>Daily User ROI</span>", right: `<span>${daily_user_roi}</span>`},
+            "APR":{left: "<input type='text' class='inputBlock' placeholder='BUSD' value='50'>", right: `<div class='button'>APPROVE</div>`}
+        }
     },
     methods:{
         onWalletBalanceChanged(){
             wallet_balance = 1, user_invested = 1, profit_5x = 1, remaining_5x = 0, daily_user_roi = 0;
             this.investment_portal = {
-                "wb": {"left": "<span>Wallet Balance</span>", "right": `<span>${wallet_balance}</span>`},
-                "ui": {"left": "<span>User Invested</span>", "right": `<span>${user_invested}</span>`},
-                "p5": {"left": "<span>5x Profit</span>", "right": `<span>${profit_5x}</span>`},
-                "r5": {"left": "<span>5x Remaining</span>", "right": `<span>${remaining_5x}</span>`},
-                "dur": {"left": "<span>Daily User ROI</span>", "right": `<span>${daily_user_roi}</span>`},
-                "apr": {"left": "<input type='number' class='inputBlock' placeholder='BUSD' value='50'>", "right": `<div class='button'>APPROVE</div>`}
-            };
+                "WB":{left: "<span>Wallet Balance</span>", right: `<span>${wallet_balance}</span>`},
+                "UI":{left: "<span>User Invested</span>", right: `<span>${user_invested}</span>`},
+                "P5X":{left: "<span>5x Profit</span>", right: `<span>${profit_5x}</span>`},
+                "R5X":{left: "<span>5x Remaining</span>", right: `<span>${remaining_5x}</span>`},
+                "DUR":{left: "<span>Daily User ROI</span>", right: `<span>${daily_user_roi}</span>`},
+                "APR":{left: "<input type='text' class='inputBlock' placeholder='BUSD' value='50'>", right: `<div class='button'>APPROVE</div>`}
+            }
         }
     }
 }

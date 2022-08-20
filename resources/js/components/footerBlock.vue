@@ -15,12 +15,12 @@
             </div>
         </div>
         <div class="f2">
-            <div class="f2Text" v-for="item in f2Text" :key="item">
+            <div class="f2Text" v-for="(items, key) in f2Text" :key="key">
                 <div class="f2TextTitle">
-                    Verified Public Contract
+                    {{items.title}}
                 </div>
                 <div class="f2TextContent">
-                    {{item}}
+                    {{items.content}}
                 </div>
             </div>
         </div>
@@ -37,11 +37,11 @@
 export default {
     data() {
         return {
-            f2Text: [
-                "StarStone Miner contract is public, verified and can be viewed here on BscScan.",
-                "T-REX Miner pays 10% daily, according to the current mining efficiency rate. The mining efficiency rate rises and falls as you and other players hire miners, compound earnings and pocket BUSD.",
-                "T-REX Miner pays a modest 10% daily, allowing investors to rest easy knowing that their investments have unlimited growth potential and a maximum, improbable risk of less than 10%."
-            ]
+            f2Text: {
+                "VPC":{title:"Verified Public Contract", content: "StarStone Miner contract is public, verified and can be viewed here on BscScan."},
+                "MI":{title:"Miner info", content: "T-REX Miner pays 10% daily, according to the current mining efficiency rate. The mining efficiency rate rises and falls as you and other players hire miners, compound earnings and pocket BUSD."},
+                "SS":{title:"Sustainability", content: "T-REX Miner pays a modest 10% daily, allowing investors to rest easy knowing that their investments have unlimited growth potential and a maximum, improbable risk of less than 10%."}
+            }
         }
     }
 }

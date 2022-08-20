@@ -24,11 +24,11 @@ export default {
     },
     created() {
         this.statistics = {
-            "dr": {"left": `<span>Daily Rewards <br> ${daily_reward}BUSD</span>`, "right": `<div class="button">CLAIM</div>`},
-            "cl": {"left": `<span>Last Claim <br> ${last_claim} <br></span>`, "right": `<span>Next Claim <br> ${next_claim} <br></span>`},
-            "aw": {"left": `<span>Available Withdrawal 50% Allowed <br> ${available_withdrawl}&ensp;BUSD</span>`, "right": `<div class="button" style="padding: 1vw">WITHDRAW</div>`},
-            "wd": {"left": `<span>Last Withdraw <br> ${last_withdraw} <br></span>`, "right": `<span>Next Withdraw <br> ${next_withdraw} <br></span>`},
-            "tw": {"left": "<span>Total Withdrawn</span>", "right": `<span>${total_withdrawn}&ensp;BUSD</span>`}
+            "DR":{left: `<span>Daily Rewards <br> ${daily_reward}BUSD</span>`, right: `<div class="button">CLAIM</div>`},
+            "LC":{left: `<span>Last Claim <br> ${last_claim} <br></span>`, right: `<span>Next Claim <br> ${next_claim} <br></span>`},
+            "AW":{left: `<span>Available Withdrawal 50% Allowed <br> ${available_withdrawl}&ensp;BUSD</span>`, right: `<div class="button" style="padding: 1vw">WITHDRAW</div>`},
+            "LW":{left: `<span>Last Withdraw <br> ${last_withdraw} <br></span>`, right: `<span>Next Withdraw <br> ${next_withdraw} <br></span>`},
+            "TW":{left: "<span>Total Withdrawn</span>", right: `<span>${total_withdrawn}&ensp;BUSD</span>`}
         }
     },
 }

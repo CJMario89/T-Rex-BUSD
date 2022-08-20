@@ -5269,7 +5269,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      f2Text: ["StarStone Miner contract is public, verified and can be viewed here on BscScan.", "T-REX Miner pays 10% daily, according to the current mining efficiency rate. The mining efficiency rate rises and falls as you and other players hire miners, compound earnings and pocket BUSD.", "T-REX Miner pays a modest 10% daily, allowing investors to rest easy knowing that their investments have unlimited growth potential and a maximum, improbable risk of less than 10%."]
+      f2Text: {
+        "VPC": {
+          title: "Verified Public Contract",
+          content: "StarStone Miner contract is public, verified and can be viewed here on BscScan."
+        },
+        "MI": {
+          title: "Miner info",
+          content: "T-REX Miner pays 10% daily, according to the current mining efficiency rate. The mining efficiency rate rises and falls as you and other players hire miners, compound earnings and pocket BUSD."
+        },
+        "SS": {
+          title: "Sustainability",
+          content: "T-REX Miner pays a modest 10% daily, allowing investors to rest easy knowing that their investments have unlimited growth potential and a maximum, improbable risk of less than 10%."
+        }
+      }
     };
   }
 });
@@ -5292,7 +5305,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       contract_balance: '',
       daily_roi: 10,
-      withdraw_fee: 2,
+      withdraw_fee: 6,
       deposit_fee_market: 4,
       deposit_fee_dev: 2
     };
@@ -5341,9 +5354,9 @@ var daily_return = 5,
       weekly_return = parseFloat(parseFloat(amount / 10 * 7).toPrecision(12));
       monthly_return = parseFloat(parseFloat(amount / 10 * 30).toPrecision(12));
       this.returns = {
-        "Daily": daily_return,
-        "Weekly": weekly_return,
-        "Monthly": monthly_return
+        Daily: daily_return,
+        Weekly: weekly_return,
+        Monthly: monthly_return
       };
     }
   }
@@ -5388,29 +5401,29 @@ var wallet_balance = 0,
           switch (_context.prev = _context.next) {
             case 0:
               this.investment_portal = {
-                "wb": {
-                  "left": "<span>Wallet Balance</span>",
-                  "right": "<span>".concat(wallet_balance, "</span>")
+                "WB": {
+                  left: "<span>Wallet Balance</span>",
+                  right: "<span>".concat(wallet_balance, "</span>")
                 },
-                "ui": {
-                  "left": "<span>User Invested</span>",
-                  "right": "<span>".concat(user_invested, "</span>")
+                "UI": {
+                  left: "<span>User Invested</span>",
+                  right: "<span>".concat(user_invested, "</span>")
                 },
-                "p5": {
-                  "left": "<span>5x Profit</span>",
-                  "right": "<span>".concat(profit_5x, "</span>")
+                "P5X": {
+                  left: "<span>5x Profit</span>",
+                  right: "<span>".concat(profit_5x, "</span>")
                 },
-                "r5": {
-                  "left": "<span>5x Remaining</span>",
-                  "right": "<span>".concat(remaining_5x, "</span>")
+                "R5X": {
+                  left: "<span>5x Remaining</span>",
+                  right: "<span>".concat(remaining_5x, "</span>")
                 },
-                "dur": {
-                  "left": "<span>Daily User ROI</span>",
-                  "right": "<span>".concat(daily_user_roi, "</span>")
+                "DUR": {
+                  left: "<span>Daily User ROI</span>",
+                  right: "<span>".concat(daily_user_roi, "</span>")
                 },
-                "apr": {
-                  "left": "<input type='text' class='inputBlock' placeholder='BUSD' value='50'>",
-                  "right": "<div class='button'>APPROVE</div>"
+                "APR": {
+                  left: "<input type='text' class='inputBlock' placeholder='BUSD' value='50'>",
+                  right: "<div class='button'>APPROVE</div>"
                 }
               };
 
@@ -5432,29 +5445,29 @@ var wallet_balance = 0,
     onWalletBalanceChanged: function onWalletBalanceChanged() {
       wallet_balance = 1, user_invested = 1, profit_5x = 1, remaining_5x = 0, daily_user_roi = 0;
       this.investment_portal = {
-        "wb": {
-          "left": "<span>Wallet Balance</span>",
-          "right": "<span>".concat(wallet_balance, "</span>")
+        "WB": {
+          left: "<span>Wallet Balance</span>",
+          right: "<span>".concat(wallet_balance, "</span>")
         },
-        "ui": {
-          "left": "<span>User Invested</span>",
-          "right": "<span>".concat(user_invested, "</span>")
+        "UI": {
+          left: "<span>User Invested</span>",
+          right: "<span>".concat(user_invested, "</span>")
         },
-        "p5": {
-          "left": "<span>5x Profit</span>",
-          "right": "<span>".concat(profit_5x, "</span>")
+        "P5X": {
+          left: "<span>5x Profit</span>",
+          right: "<span>".concat(profit_5x, "</span>")
         },
-        "r5": {
-          "left": "<span>5x Remaining</span>",
-          "right": "<span>".concat(remaining_5x, "</span>")
+        "R5X": {
+          left: "<span>5x Remaining</span>",
+          right: "<span>".concat(remaining_5x, "</span>")
         },
-        "dur": {
-          "left": "<span>Daily User ROI</span>",
-          "right": "<span>".concat(daily_user_roi, "</span>")
+        "DUR": {
+          left: "<span>Daily User ROI</span>",
+          right: "<span>".concat(daily_user_roi, "</span>")
         },
-        "apr": {
-          "left": "<input type='number' class='inputBlock' placeholder='BUSD' value='50'>",
-          "right": "<div class='button'>APPROVE</div>"
+        "APR": {
+          left: "<input type='text' class='inputBlock' placeholder='BUSD' value='50'>",
+          right: "<div class='button'>APPROVE</div>"
         }
       };
     }
@@ -5571,16 +5584,13 @@ var referral_reward = 0,
     };
   },
   created: function created() {
-    this.referral = {
-      "rr": {
-        "left": "Referral Reward",
-        "right": "".concat(referral_reward, "&ensp;BUSD")
-      },
-      "trw": {
-        "left": "Total Withdrawn",
-        "right": "".concat(total_referral_withdrawn, "&ensp;BUSD")
-      }
-    };
+    this.referral = [{
+      left: "Referral Reward",
+      right: "".concat(referral_reward, "&ensp;BUSD")
+    }, {
+      left: "Total Withdrawn",
+      right: "".concat(total_referral_withdrawn, "&ensp;BUSD")
+    }];
   }
 });
 
@@ -5612,25 +5622,25 @@ var daily_reward = 0,
   },
   created: function created() {
     this.statistics = {
-      "dr": {
-        "left": "<span>Daily Rewards <br> ".concat(daily_reward, "BUSD</span>"),
-        "right": "<div class=\"button\">CLAIM</div>"
+      "DR": {
+        left: "<span>Daily Rewards <br> ".concat(daily_reward, "BUSD</span>"),
+        right: "<div class=\"button\">CLAIM</div>"
       },
-      "cl": {
-        "left": "<span>Last Claim <br> ".concat(last_claim, " <br></span>"),
-        "right": "<span>Next Claim <br> ".concat(next_claim, " <br></span>")
+      "LC": {
+        left: "<span>Last Claim <br> ".concat(last_claim, " <br></span>"),
+        right: "<span>Next Claim <br> ".concat(next_claim, " <br></span>")
       },
-      "aw": {
-        "left": "<span>Available Withdrawal 50% Allowed <br> ".concat(available_withdrawl, "&ensp;BUSD</span>"),
-        "right": "<div class=\"button\" style=\"padding: 1vw\">WITHDRAW</div>"
+      "AW": {
+        left: "<span>Available Withdrawal 50% Allowed <br> ".concat(available_withdrawl, "&ensp;BUSD</span>"),
+        right: "<div class=\"button\" style=\"padding: 1vw\">WITHDRAW</div>"
       },
-      "wd": {
-        "left": "<span>Last Withdraw <br> ".concat(last_withdraw, " <br></span>"),
-        "right": "<span>Next Withdraw <br> ".concat(next_withdraw, " <br></span>")
+      "LW": {
+        left: "<span>Last Withdraw <br> ".concat(last_withdraw, " <br></span>"),
+        right: "<span>Next Withdraw <br> ".concat(next_withdraw, " <br></span>")
       },
-      "tw": {
-        "left": "<span>Total Withdrawn</span>",
-        "right": "<span>".concat(total_withdrawn, "&ensp;BUSD</span>")
+      "TW": {
+        left: "<span>Total Withdrawn</span>",
+        right: "<span>".concat(total_withdrawn, "&ensp;BUSD</span>")
       }
     };
   }
@@ -5658,15 +5668,15 @@ var render = function render() {
     staticClass: "footerBlock"
   }, [_vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "f2"
-  }, _vm._l(_vm.f2Text, function (item) {
+  }, _vm._l(_vm.f2Text, function (items, key) {
     return _c("div", {
-      key: item,
+      key: key,
       staticClass: "f2Text"
     }, [_c("div", {
       staticClass: "f2TextTitle"
-    }, [_vm._v("\n                Verified Public Contract\n            ")]), _vm._v(" "), _c("div", {
+    }, [_vm._v("\n                " + _vm._s(items.title) + "\n            ")]), _vm._v(" "), _c("div", {
       staticClass: "f2TextContent"
-    }, [_vm._v("\n                " + _vm._s(item) + "\n            ")])]);
+    }, [_vm._v("\n                " + _vm._s(items.content) + "\n            ")])]);
   }), 0), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("div", {
     staticClass: "copyright"
   }, [_vm._v("\n        © Copyright StarStone BUSD Miner 2022 . All Rights Reserved \n    ")])]);

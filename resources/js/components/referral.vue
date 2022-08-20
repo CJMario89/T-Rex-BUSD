@@ -47,10 +47,10 @@ export default {
         }
     },
     created() {
-        this.referral = {
-            "rr": {"left": "Referral Reward", "right": `${referral_reward}&ensp;BUSD`},
-            "trw": {"left": "Total Withdrawn", "right": `${total_referral_withdrawn}&ensp;BUSD`}
-        }
+        this.referral = [
+            {left: "Referral Reward", right: `${referral_reward}&ensp;BUSD`},
+            {left: "Total Withdrawn", right: `${total_referral_withdrawn}&ensp;BUSD`}
+        ]
     },
 }
 </script>
