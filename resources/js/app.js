@@ -6,7 +6,7 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue').default;
+window.Vue = require('vue');
 
 /**
  * The following block of code may be used to automatically register your
@@ -20,14 +20,6 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('navbar-l', require('./components/navbar_l.vue').default);
-Vue.component('navbar-r', require('./components/navbar_r.vue').default);
-Vue.component('infobar', require('./components/infobar.vue').default);
-Vue.component('investment-portal', require('./components/investmentPortal.vue').default);
-Vue.component('statistics', require('./components/statistics.vue').default);
-Vue.component('referral', require('./components/referral.vue').default);
-Vue.component('investment-calculator', require('./components/investmentCalculator.vue').default);
-Vue.component('footer-block', require('./components/footerBlock.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -39,47 +31,55 @@ Vue.component('footer-block', require('./components/footerBlock.vue').default);
 //     el: '#app',
 // });
 
-var navbar_l = new Vue({
-    data: {
+Vue.createApp({
+    components: {
+        'navbar-l': require('./components/navbar_l.vue').default
 
     }
-}).$mount('#navbar-l');
-var navbar_r = new Vue({
-    data: {
+}).mount('#navbar-l');
+Vue.createApp({
+    components: {
+        'navbar-r': require('./components/navbar_r.vue').default
 
     }
-}).$mount('#navbar-r');
-var infobar = new Vue({
-    data: {
+}).mount('#navbar-r');
+Vue.createApp({
+    components: {
+        'infobar': require('./components/infobar.vue').default
 
     }
-}).$mount('#infobar');
-var investmentPortal = new Vue({
-    data: {
+}).mount('#infobar');
+Vue.createApp({
+    components: {
+        'investment-portal': require('./components/investmentPortal.vue').default
 
     }
-}).$mount('#investment-portal');
+}).mount('#investment-portal');
 
-var statistics = new Vue({
-    data: {
-
-    }
-}).$mount('#statistics');
-
-var referral = new Vue({
-    data: {
+Vue.createApp({
+    components: {
+        'statistics': require('./components/statistics.vue').default
 
     }
-}).$mount('#referral');
+}).mount('#statistics');
 
-var investmentCalculator = new Vue({
-    data: {
-
-    }
-}).$mount('#investment-calculator');
-
-var footerBlock = new Vue({
-    data: {
+Vue.createApp({
+    components: {
+        'referral': require('./components/referral.vue').default
 
     }
-}).$mount('#footer-block');
+}).mount('#referral');
+
+Vue.createApp({
+    components: {
+        'investment-calculator': require('./components/investmentCalculator.vue').default
+
+    }
+}).mount('#investment-calculator');
+
+Vue.createApp({
+    components: {
+        'footer-block': require('./components/footerBlock.vue').default
+
+    }
+}).mount('#footer-block');
