@@ -8,6 +8,9 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import { VueDapp } from "vue-dapp";
+
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -34,52 +37,46 @@ window.Vue = require('vue');
 Vue.createApp({
     components: {
         'navbar-l': require('./components/navbar_l.vue').default
-
     }
 }).mount('#navbar-l');
-Vue.createApp({
+const navbar_r = Vue.createApp({
     components: {
         'navbar-r': require('./components/navbar_r.vue').default
-
     }
-}).mount('#navbar-r');
+});
+navbar_r.use(VueDapp);
+navbar_r.mount('#navbar-r');
 Vue.createApp({
     components: {
         'infobar': require('./components/infobar.vue').default
-
     }
 }).mount('#infobar');
 Vue.createApp({
     components: {
         'investment-portal': require('./components/investmentPortal.vue').default
-
     }
 }).mount('#investment-portal');
 
 Vue.createApp({
     components: {
         'statistics': require('./components/statistics.vue').default
-
     }
 }).mount('#statistics');
 
 Vue.createApp({
     components: {
         'referral': require('./components/referral.vue').default
-
     }
 }).mount('#referral');
 
 Vue.createApp({
     components: {
         'investment-calculator': require('./components/investmentCalculator.vue').default
-
     }
 }).mount('#investment-calculator');
 
 Vue.createApp({
     components: {
         'footer-block': require('./components/footerBlock.vue').default
-
     }
 }).mount('#footer-block');
