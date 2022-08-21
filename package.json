@@ -23,11 +23,5 @@
         "vue": "^3.2.36",
         "vue-loader": "^16.8.3",
         "vue-template-compiler": "^2.6.12"
-    },
-    "dependencies": {
-        "browserify-fs": "^1.0.0",
-        "ethers": "^5.7.0",
-        "node-polyfill-webpack-plugin": "^2.0.1",
-        "vue-dapp": "^0.5.5"
     }
 }
