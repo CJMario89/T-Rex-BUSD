@@ -92,6 +92,7 @@
 @endsection
 
 @section('script')
+    <script src="/js/webInit.js"></script>
     <script>
         var web3;
         var accounts;

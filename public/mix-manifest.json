@@ -1,5 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
+    "/js/webInit.js": "/js/webInit.js",
     "/css/app.css": "/css/app.css",
     "/css/fonts/Inter.ttf": "/css/fonts/Inter.ttf"
 }
