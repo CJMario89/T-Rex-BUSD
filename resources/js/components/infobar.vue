@@ -39,10 +39,12 @@ export default {
         align-content: center;
         position: relative;
         color: white;
-        font-size: 1.55vw;
+        font-size: 1.5vw;
         font-weight: 600;
-        width: 96%;
-        margin: 2%;
+        width: 90%;
+        margin: 5%;
+        margin-bottom: 1%;
+        margin-top: 1%;
     }
 
     .infobarC{

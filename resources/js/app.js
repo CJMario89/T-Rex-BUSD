@@ -83,3 +83,17 @@ Vue.createApp({
 
     }
 }).mount('#footer-block');
+
+Vue.createApp({
+    components: {
+        'web3-connector': require('./components/web3Connector.vue').default
+
+    }
+}).mount('#web3-connector');
+
+
+
+import Web3 from "web3";
+import CoinbaseWalletProvider from "@coinbase/wallet-sdk";
+import WalletConnectProvider from "@walletconnect/web3-provider";
+window.WalletConnectProvider = WalletConnectProvider;

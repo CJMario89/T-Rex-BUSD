@@ -57,7 +57,7 @@ export default {
         margin-top: 6vw;
     }
     .f1Img1{
-        width: 25vw;
+        width: 22vw;
         img{
             width: 100%;
             height: auto;
@@ -70,7 +70,7 @@ export default {
         white-space: pre-line;
     }
     .f1Img2{
-        width: 25vw;
+        width: 22vw;
         img{
             width: 100%;
             height: auto;
@@ -81,12 +81,12 @@ export default {
         flex-direction: row;
         justify-content: space-around;
         align-items: flex-start;
-        width: 94vw;
+        width: 85vw;
         margin: 0 auto;
         // margin-top: 6vw;
     }
     .f2Text{
-        width: 28.4vw;
+        width: 25.4vw;
     }
     .f2TextTitle{
         color: #FB68FB;
@@ -122,6 +122,6 @@ export default {
         margin-top: 1vw;
         opacity: 0.7;
         font-size: 0.9vw;
-        padding-bottom: 8vw;
+        padding-bottom: 6vw;
     }
 </style>

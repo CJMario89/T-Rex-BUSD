@@ -19,6 +19,7 @@
     </div>
 </template>
 <script>
+    var listenFlag = 0;
 
 export default {
     data: function(){
@@ -29,10 +30,16 @@ export default {
     },
     methods: {
         connect_wallet: async function(){
-            await web3_init();
-            console.log(accounts);
-            //await createContract();
-            //await createToken();
+            document.querySelector(".providerContainer").style.display = "flex";
+            if(!listenFlag){
+                window.addEventListener("click", function(e){
+                    if(e.target.closest(".navbarC") == null){
+                        document.querySelector(".providerContainer").style.display = "none";
+                    }
+                });
+                listenFlag = 1;
+            }
+
         },
 
         toggleLanguage: function(){
