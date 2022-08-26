@@ -7,6 +7,15 @@
         <title>T-REX BUSD</title>
         <link rel="stylesheet" href="{{asset('css/app.css')}}">
         <script src="/js/web3.min.js"></script>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-LYRJYPW7VB"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-LYRJYPW7VB');
+        </script>
         @yield('style')
     </head>
     <body>
