@@ -32,7 +32,7 @@
             <div class="referralDes">
                 You Can Earn BUSD Tokens for inviting new users to join us.
                 The StarStone Miner contract has a direct, 
-                one-level referral system That Rewards Referrer when invited users deposit their tokens. 
+                one-level referral system.
                 Promote your referral link and Earn <span style="color:#F0BF13;">12%</span> Referral Rewards.
             </div>
         </div>
