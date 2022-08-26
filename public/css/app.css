@@ -79,7 +79,7 @@ body {
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
-  font-size: 1.2vw;
+  font-size: 1.1vw;
   font-weight: 600;
 }
 
@@ -105,9 +105,9 @@ body {
   background-color: black;
   border-radius: 0.5vw;
   color: white;
-  font-size: 1.3vw;
+  font-size: 1.18vw;
   font-weight: 700;
-  padding: 1vw 2vw;
+  padding: 0.8vw 1.6vw;
   cursor: pointer;
 }
 
