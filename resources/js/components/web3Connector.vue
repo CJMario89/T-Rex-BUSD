@@ -164,9 +164,9 @@
         z-index: 2;
         color: white;
     }
-    @media screen and (max-width:800px){
+    @media screen and (max-width:821px){
         .mobileInvalid{
-            display: none;
+            display: none !important;
         }
     }
 </style>

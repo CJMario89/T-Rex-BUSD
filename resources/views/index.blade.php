@@ -61,7 +61,7 @@
             margin-top: 1%;
         }
 
-        @media screen and (max-width:800px){
+        @media screen and (max-width:821px){
             #navbar{
                 display: block;
                 width: 100%;
@@ -153,7 +153,8 @@
             #investment-calculator{
                 display: block;
                 position: relative;
-                margin: 5vw;
+                margin: -2vw;
+                margin-left: 7vw;
                 width: 92vw;
                 padding-bottom: 2vw;
             }

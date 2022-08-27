@@ -56,7 +56,7 @@ body {
   cursor: pointer;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 821px) {
   .navbarC {
     display: flex;
     flex-direction: row;
@@ -145,7 +145,7 @@ body {
   border: none;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 821px) {
   .MBTitle {
     display: block;
     font-size: 4vw;
@@ -199,7 +199,7 @@ body {
     cursor: pointer;
   }
   .inputBlock {
-    width: 36vw;
+    width: 33vw;
     background-color: #D1D3E8;
     border-radius: 1.5vw;
     color: #642F8E;

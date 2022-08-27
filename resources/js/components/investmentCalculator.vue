@@ -132,10 +132,10 @@ export default {
         padding: 0.5vw;
         padding-left: 0vw;
     }
-    @media screen and (max-width:800px){
+    @media screen and (max-width:821px){
         .investmentCalculator{
             display: block;
-            width: calc(100% - 12vw);
+            width: calc(100% - 14vw);
             height: calc(100% - 4vw);
             border-radius: 0.6vw;
             padding: 4vw 4vw;

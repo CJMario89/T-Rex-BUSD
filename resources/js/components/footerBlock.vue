@@ -125,7 +125,7 @@ export default {
         padding-bottom: 6vw;
     }
 
-    @media screen and (max-width:800px) {
+    @media screen and (max-width:821px) {
         .f1{
             display: flex;
             flex-direction: row;
@@ -145,8 +145,9 @@ export default {
         .f1Text{
             color: #FFF7FF;
             font-weight: 900;
-            font-size: 5vw;
+            font-size: 4.8vw;
             white-space: pre-line;
+            padding-top: 25vw
         }
         .f1Img2{
             width: 0vw;

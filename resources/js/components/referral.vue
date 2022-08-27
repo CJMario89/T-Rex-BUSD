@@ -117,7 +117,7 @@ export default {
         line-height: 1.1vw;
     }
 
-    @media screen and (max-width:800px) {
+    @media screen and (max-width:821px) {
         .referral{
             display: flex;
             flex-direction: column;

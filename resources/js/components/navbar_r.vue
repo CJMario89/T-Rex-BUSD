@@ -108,7 +108,7 @@ export default {
             }
         }
     }
-    @media screen and (max-width:800px) {
+    @media screen and (max-width:821px) {
         .navbarR{
             display: flex;
             flex-direction: column-reverse;

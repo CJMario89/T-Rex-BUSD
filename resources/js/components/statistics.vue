@@ -42,7 +42,7 @@ export default {
         padding: 2vw 1vw;
         background: #794DFD;
     }
-    @media screen and (max-width:800px) {
+    @media screen and (max-width:821px) {
         .statistics{
             display: block;
             width: calc(100% - 12vw);

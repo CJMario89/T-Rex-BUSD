@@ -67,7 +67,7 @@ export default {
         }
     }
 
-    @media screen and (max-width:800px){
+    @media screen and (max-width:821px){
         .infobar{
             display: flex;
             flex-direction: column;
