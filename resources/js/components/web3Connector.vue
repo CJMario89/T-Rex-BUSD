@@ -168,5 +168,8 @@
         .mobileInvalid{
             display: none !important;
         }
+        .providerContainer{
+            width: 80vw;
+        }
     }
 </style>
