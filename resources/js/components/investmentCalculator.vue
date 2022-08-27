@@ -132,4 +132,83 @@ export default {
         padding: 0.5vw;
         padding-left: 0vw;
     }
+    @media screen and (max-width:800px){
+        .investmentCalculator{
+            display: block;
+            width: calc(100% - 12vw);
+            height: calc(100% - 4vw);
+            border-radius: 0.6vw;
+            padding: 4vw 4vw;
+            background: #794DFD;
+            border: 1px white solid;
+            margin-bottom: 4vw;
+        }
+        .ICTitle{
+            display: block;
+            position: relative;
+            font-size: 4vw;
+            font-weight: 600;
+            color: #FFFBFF;;
+            width: calc(100% - 1vw);
+            margin-left: 1vw;
+            padding-bottom: 2vw;
+            margin-bottom: 1vw;
+        }
+        .ICTitle::after{
+            display: block;
+            position: absolute;
+            content: "";
+            bottom: 0px;
+            left: -1vw;
+            height: 1px;
+            width: calc(100% + 1vw);
+            opacity: 0.5;
+            background-color: #FAF1F1;
+        }
+        .ICContent{
+            display: flex;
+            color: #FFF7FF;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-top: 1vw;
+        }
+        .ICInputTitle{
+            font-size: 4vw;
+            font-weight: 700;
+            padding: 1vw;
+            padding-top: 2vw;
+            padding-bottom: 3vw;
+        }
+        .ICInput{
+            width: 42vw;
+            margin: 1vw;
+            margin-top: 0.5vw;
+            margin-bottom: 0.5vw;
+        }
+        .ICInputDes{
+            font-size: 3vw;
+            font-weight: 700;
+            padding: 1vw;
+            padding-top: 4vw;
+            padding-bottom: 2vw;
+            line-height: 4vw;
+        }
+        .ICOutputTitle{
+            font-size: 4vw;
+            font-weight: 700;
+            padding: 1vw;
+            padding-left: 1vw;
+            margin-top: 2vw;
+            margin-bottom: 4vw;
+            margin-top: 7vw;
+        }
+        .ICOutput{
+            font-size: 3.2vw;
+            font-weight: 700;
+            padding: 0.5vw;
+            padding-left: 1vw;
+            padding-bottom: 2vw;
+        }
+    }
 </style>

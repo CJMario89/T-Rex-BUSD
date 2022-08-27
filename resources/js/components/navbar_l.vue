@@ -7,6 +7,9 @@
             <span style="width:70%">
                 <img src="/images/T-REXBUSD.png">
             </span>
+            <span style="width:28%" class="logoT2">
+                <img src="/images/T2.png">
+            </span>
         </a>
         <a class="navbarC">WHITEPAPER</a>
         <a class="navbarC">AUDIT</a>
@@ -41,5 +44,40 @@ export default {
                 height: auto;
             }
         }
+        .logoT2{
+            display: none;
+        }
     }
+    @media screen and (max-width:800px) {
+        .navbarL{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            width: 50vw;
+            left: 15vw;
+        }
+        .logo{
+            display: flex;
+            flex-direction: row;
+            align-content: space-between;
+            align-items: center;
+            width: 168.3%;
+            position: relative;
+            left: 15vw;
+            span{
+                position: relative;
+                height: fit-content;
+                margin: 0 auto;
+                img{
+                    width: 100%;
+                    height: auto;
+                }
+            }
+            .logoT2{
+                display: block;
+            }
+        }
+    }
+    
 </style>

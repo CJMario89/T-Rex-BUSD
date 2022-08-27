@@ -14,3 +14,26 @@
     }
     cursor: pointer;
 }
+@media screen and (max-width:800px) {
+    .navbarC{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: 73%;
+        height: fit-content;
+        padding: 2vw 2.3vw;
+        background: #AE3DE3;
+        border-radius: 1.2vw;
+        color: white;
+        margin: 0vw;
+        margin-top: 2vw;
+        margin-bottom: 2vw;
+        font:{
+            size: 4.2vw;
+            weight: 900;
+        }
+        cursor: pointer;
+    }
+}

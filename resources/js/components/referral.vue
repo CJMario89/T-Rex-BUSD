@@ -116,4 +116,72 @@ export default {
         margin-top: 1vw;
         line-height: 1.1vw;
     }
+
+    @media screen and (max-width:800px) {
+        .referral{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+        }
+        .referralR{
+            display: block;
+            width: calc(100% - 12vw);
+            height: calc(100% - 4vw);
+            border-radius: 0.6vw;
+            padding: 2vw 4vw;
+            background: #794DFD;
+            border: 1px white solid;
+            margin-bottom: 4vw;
+        }
+        .referralL{
+            display: block;
+            width: calc(100% - 12vw);
+            height: calc(100% - 4vw);
+            border-radius: 0.6vw;
+            padding: 2vw 4vw;
+            background: #794DFD;
+            border: 1px white solid;
+        }
+        .referralHint{
+            display: block;
+            position: absolute;
+            top: 4vw;
+            right: 5vw;
+            color: white;
+            font-size: 4vw;
+            font-weight: 700;
+        }
+        .referralTitle{
+            position: relative;
+            padding-bottom: 3vw;
+            margin-bottom: 2vw;
+            margin-top: 2vw;
+        }
+        .referralTitle::after{
+            display: block;
+            position: absolute;
+            content: "";
+            bottom: 0px;
+            left: -1vw;
+            height: 1px;
+            width: calc(100% + 1vw);
+            opacity: 0.5;
+            background-color: #FAF1F1;
+        }
+        .referralContent{
+            padding-bottom: 1vw;
+        }
+        .referralContent::before{
+            display: none !important;
+        }
+        .referralDes{
+            color: #F2EAEA;
+            font-size: 3vw;
+            font-weight: 700;
+            margin-top: 1vw;
+            line-height: 5vw;
+        }
+    }
 </style>

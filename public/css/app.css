@@ -11,7 +11,7 @@ body {
   height: 100%;
   width: 100%;
   margin: 0 auto;
-  background-color: #1E1E1E;
+  background-color: #1B1C2D;
   position: relative;
   font-family: "Inter";
   letter-spacing: 1px;
@@ -56,6 +56,29 @@ body {
   cursor: pointer;
 }
 
+@media screen and (max-width: 800px) {
+  .navbarC {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 73%;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    padding: 2vw 2.3vw;
+    background: #AE3DE3;
+    border-radius: 1.2vw;
+    color: white;
+    margin: 0vw;
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+    font-size: 4.2vw;
+    font-weight: 900;
+    cursor: pointer;
+  }
+}
 .MBTitle {
   display: block;
   font-size: 1.3vw;
@@ -119,4 +142,69 @@ body {
   font-size: 1.3vw;
   font-weight: 700;
   padding: 0.6vw 1vw;
+  border: none;
+}
+
+@media screen and (max-width: 800px) {
+  .MBTitle {
+    display: block;
+    font-size: 4vw;
+    font-weight: 600;
+    color: #FFFBFF;
+    width: calc(100% - 1vw);
+    margin-left: 1vw;
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+  }
+  .MBContent {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: #FFFBFF;
+    width: calc(100% - 2vw);
+    padding: 1vw;
+    padding-top: 3.5vw !important;
+    padding-bottom: 3.5vw !important;
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+    font-size: 4vw;
+    font-weight: 600;
+  }
+  .MBContent::before {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 1%;
+    width: 98%;
+    height: 2px;
+    background-color: #FAF1F1;
+    opacity: 0.3;
+  }
+  .MBC {
+    display: block;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+  }
+  .button {
+    background-color: black;
+    border-radius: 2vw;
+    color: white;
+    font-size: 4vw;
+    font-weight: 700;
+    padding: 3.5vw 6vw !important;
+    cursor: pointer;
+  }
+  .inputBlock {
+    width: 36vw;
+    background-color: #D1D3E8;
+    border-radius: 1.5vw;
+    color: #642F8E;
+    font-size: 4vw;
+    font-weight: 700;
+    padding: 2vw 2.5vw;
+  }
 }

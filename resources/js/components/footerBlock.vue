@@ -6,7 +6,7 @@
             </div>
             <div>
                 <span class="f1Text">
-                    LET’S JOIN
+                    LET’S JOIN<br>
                     T-REX MINER
                 </span>
             </div>
@@ -123,5 +123,87 @@ export default {
         opacity: 0.7;
         font-size: 0.9vw;
         padding-bottom: 6vw;
+    }
+
+    @media screen and (max-width:800px) {
+        .f1{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            width: 80vw;
+            margin: 0 auto;
+            margin-top: 6vw;
+        }
+        .f1Img1{
+            width: 45vw;
+            img{
+                width: 100%;
+                height: auto;
+            }
+        }
+        .f1Text{
+            color: #FFF7FF;
+            font-weight: 900;
+            font-size: 5vw;
+            white-space: pre-line;
+        }
+        .f1Img2{
+            width: 0vw;
+            img{
+                width: 100%;
+                height: auto;
+            }
+        }
+        .f2{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: flex-start;
+            width: 85vw;
+            margin: 0 auto;
+            // margin-top: 6vw;
+        }
+        .f2Text{
+            width: 100%;
+        }
+        .f2TextTitle{
+            color: #FB68FB;
+            font-size: 4vw;
+            font-weight: 700;
+            padding: 1vw;
+            padding-left: 0vw;
+        }
+        .f2TextContent{
+            color: #FFFBFF;;
+            font-size: 3vw;   
+            font-weight: 300;
+            line-height: 4vw;
+            padding-top: 4vw;
+            padding-bottom: 10vw;
+        }
+        .warning{
+            color:#FFFBFF;
+            display: block;
+            background-color: #1B1C2D;
+            font-size: 3vw;
+            line-height: 4vw;
+            padding: 0.5vw 2vw;
+            width: fit-content;
+            margin: 6vw;
+            margin-top: 8vw;
+            opacity: 0.8;
+            border-radius: 0.6vw;
+        }
+        .copyright{
+            color:#D335E4;
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            margin-top: 1vw;
+            opacity: 0.7;
+            font-size: 2.2vw;
+            padding-bottom: 6vw;
+        }
     }
 </style>

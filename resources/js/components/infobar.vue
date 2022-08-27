@@ -66,5 +66,47 @@ export default {
             vertical-align: middle;
         }
     }
+
+    @media screen and (max-width:800px){
+        .infobar{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-content: center;
+            position: relative;
+            color: white;
+            font-size: 4.5vw;
+            font-weight: 600;
+            width: 86%;
+            margin: 5.5%;
+            margin-bottom: 1%;
+            margin-top: 1%;
+        }
+
+        .infobarC{
+            width: 100%;
+            margin: 1%;
+            margin-top: 2%;
+            margin-bottom: 2%;
+            background: #794DFD;
+            display: flex;
+            position: relative;
+            flex-direction: column;
+            justify-content: space-around;
+            align-content: space-around;
+            border-radius: 1.2vw;
+            padding-top: 5vw;
+            padding-bottom: 5vw;
+            height: 15vw;
+            border: 1px white solid;
+            span{
+                margin: 0.5vw;
+                margin-left: 0vw;
+                margin-right: 0vw;
+                text-align: center;
+                vertical-align: middle;
+            }
+        }
+    }
     
 </style>

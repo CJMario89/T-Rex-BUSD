@@ -60,6 +60,104 @@
             width: 90%;
             margin-top: 1%;
         }
+
+        @media screen and (max-width:800px){
+            #navbar{
+                display: block;
+                width: 100%;
+                position: relative;
+                height: 63vw;
+                padding-bottom: 6vw;
+                margin-top: 24vw;
+            }
+            #navbar-l{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                top: 2vw;
+                left: 2%;
+                position: absolute;
+            }
+            #navbar-r{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                top: 2vw;
+                right: 2%;
+                position: absolute;
+            }
+            #infobar{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                position: relative;
+                width: 100%;
+                padding-bottom: 6vw;
+                padding-top: 6vw;
+            }
+            #infobar::before{
+                content: "";
+                height: 2px;
+                width: 87%;
+                left: 7%;
+                background-color: white;
+                opacity: 0.3;
+                display: block;
+                position: absolute;
+                top: 0px;
+            }
+            #infobar::after{
+                content: "";
+                height: 2px;
+                width: 87%;
+                left: 7%;
+                background-color: white;
+                opacity: 0.3;
+                display: block;
+                position: absolute;
+                bottom: 0px;
+            }
+            #middleBlock{
+                display: flex;
+                position: relative;
+                flex-direction: column;
+                justify-content: space-around;
+                margin: 5vw;
+                width: 90vw;
+                height: auto;
+                padding: 2vw;
+            }
+            #investment-portal{
+                display: block;
+                position: relative;
+                margin: 1%;
+                width: 100%;
+                padding-bottom: 0.5vw;
+            }
+            #statistics{
+                display: block;
+                position: relative;
+                margin: 1%;
+                width: 100%;
+                padding-bottom: 0.5vw;
+                padding-top: 0.5vw;
+            }
+            #referral{
+                display: block;
+                position: relative;
+                margin: 1%;
+                width: 100%;
+                padding-bottom: 0.5vw;
+                padding-top: 0.5vw;
+            }
+            #investment-calculator{
+                display: block;
+                position: relative;
+                margin: 5vw;
+                width: 92vw;
+                padding-bottom: 2vw;
+            }
+        }
     </style>
 @endsection
 

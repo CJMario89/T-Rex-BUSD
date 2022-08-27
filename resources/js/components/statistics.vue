@@ -42,4 +42,15 @@ export default {
         padding: 2vw 1vw;
         background: #794DFD;
     }
+    @media screen and (max-width:800px) {
+        .statistics{
+            display: block;
+            width: calc(100% - 12vw);
+            height: calc(100% - 4vw);
+            border-radius: 0.6vw;
+            padding: 2vw 4vw;
+            background: #794DFD;
+            border: 1px white solid;
+        }
+    }
 </style>
