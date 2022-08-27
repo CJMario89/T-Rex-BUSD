@@ -95,8 +95,8 @@ export default {
             justify-content: space-around;
             align-content: space-around;
             border-radius: 1.2vw;
-            padding-top: 5vw;
-            padding-bottom: 5vw;
+            padding-top: 7vw;
+            padding-bottom: 7vw;
             height: 15vw;
             border: 1px white solid;
             span{

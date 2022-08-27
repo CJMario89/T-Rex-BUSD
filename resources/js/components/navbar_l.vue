@@ -1,13 +1,13 @@
 <template>
     <div class="navbarL">
         <a class="logo">
-            <span style="width:25%">
+            <span style="width:20%">
                 <img src="/images/logo.png">
             </span>
-            <span style="width:70%">
+            <span style="width:50%">
                 <img src="/images/T-REXBUSD.png">
             </span>
-            <span style="width:28%" class="logoT2">
+            <span style="width:22%" class="logoT2">
                 <img src="/images/T2.png">
             </span>
         </a>
