@@ -1,7 +1,7 @@
 
 <template>
     <div class="providerContainer">
-        <div class="provider" v-on:click="Metamask">
+        <div class="provider mobileInvalid" v-on:click="Metamask">
             <div class="providerIcon">
                 <img src="/images/metamask.svg" class="MICON">
             </div>
@@ -108,7 +108,7 @@
         display: none;
         width: 400px;
         height: auto;
-        opacity: 0.8;
+        opacity: 0.9;
         color: black;
         color: white;
         flex-direction: column;
@@ -163,5 +163,10 @@
         font-size: 24px;
         z-index: 2;
         color: white;
+    }
+    @media screen and (max-width:800px){
+        .mobileInvalid{
+            display: none;
+        }
     }
 </style>
