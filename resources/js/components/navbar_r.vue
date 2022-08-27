@@ -115,7 +115,7 @@ export default {
             position: relative;
             justify-content: flex-start;
             align-items: center;
-            margin-top: 20.5vw;
+            margin-top: 20vw;
         }
         .language{
             display: inline-block;
@@ -160,7 +160,7 @@ export default {
             }
         }
         .connectWallet{
-            height: 17.6vw;
+            height: 18.5vw;
             background-color: #794DFD;
             text-align: center;
             border: 1px white solid;

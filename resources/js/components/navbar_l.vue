@@ -64,7 +64,7 @@ export default {
             align-items: center;
             width: 168.3%;
             position: relative;
-            left: 15vw;
+            margin-left: 47vw;
             span{
                 position: relative;
                 height: fit-content;
