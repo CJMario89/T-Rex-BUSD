@@ -8,7 +8,7 @@
                 <div class="ICInputTitle">
                     BUSD AMOUNT
                 </div>
-                <input class="ICInput inputBlock" type="number" placeholder="50" v-on:input="onChangeICInput" v-model="ICInput">
+                <input class="ICInput inputBlock" type="number" placeholder="0" v-on:input="onChangeICInput" v-model="ICInput">
                 <div class="ICInputDes">
                     Amount of returns calculated on the basis of investment amount.<br>
                     Note: Min investment is 50 BUSD & max amount of investment in 100k BUSD.
@@ -44,7 +44,7 @@ export default {
     methods: {
         onChangeICInput: function(){
             var amount = 50;
-            if(this.ICInput != ""){
+            if(this.ICInput != "" || this.ICInput == 0){
                 amount = this.ICInput;
             }
             daily_return = parseFloat(parseFloat(amount / 10).toPrecision(12));

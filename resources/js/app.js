@@ -31,16 +31,24 @@ window.Vue = require('vue');
 //     el: '#app',
 // });
 
+import Web3 from "web3";
+import CoinbaseWalletProvider from "@coinbase/wallet-sdk";
+import WalletConnectProvider from "@walletconnect/web3-provider";
+window.WalletConnectProvider = WalletConnectProvider;
+import mitt from 'mitt';
+window.emitter = mitt();
+
+
+import {stake, unstake, daily_claim, weekly_withdraw, withdraw_referral, get_msg_dailyClaim, get_msg_deposit, get_msg_referral, get_msg_status, get_msg_weeklywithdraw, get_trexbusd_data} from '/js/contract';
+
 Vue.createApp({
     components: {
         'navbar-l': require('./components/navbar_l.vue').default
-
     }
 }).mount('#navbar-l');
 Vue.createApp({
     components: {
         'navbar-r': require('./components/navbar_r.vue').default
-
     }
 }).mount('#navbar-r');
 Vue.createApp({
@@ -49,11 +57,11 @@ Vue.createApp({
 
     }
 }).mount('#infobar');
-Vue.createApp({
+var investment_portal = Vue.createApp({
     components: {
         'investment-portal': require('./components/investmentPortal.vue').default
-
-    }
+    },
+    props: ['account']
 }).mount('#investment-portal');
 
 Vue.createApp({
@@ -93,7 +101,3 @@ Vue.createApp({
 
 
 
-import Web3 from "web3";
-import CoinbaseWalletProvider from "@coinbase/wallet-sdk";
-import WalletConnectProvider from "@walletconnect/web3-provider";
-window.WalletConnectProvider = WalletConnectProvider;

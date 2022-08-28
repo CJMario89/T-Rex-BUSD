@@ -28,6 +28,7 @@
         "@coinbase/wallet-sdk": "^3.5.0",
         "@walletconnect/web3-provider": "^1.8.0",
         "browserify-fs": "^1.0.0",
+        "mitt": "^3.0.0",
         "node-polyfill-webpack-plugin": "^2.0.1",
         "web3": "^1.7.5"
     }

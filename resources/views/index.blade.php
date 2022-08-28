@@ -163,6 +163,9 @@
 @endsection
 
 @section('body')
+    <div id="contract">
+        <contract></contract>
+    </div>
     <div id="web3-connector">
         <web3-connector></web3-connector>
     </div>
@@ -199,11 +202,15 @@
 @section('script')
     <script>
         var web3;
-        var accounts;
-        var chainId;
+        var account;
+        var token;
+        var contract;
 
-        const BUSD_Address = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
 
+
+        const BUSD_Address = "0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee";
+        //const BUSD_Address = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
+        const referral_address = "{{$referral_address}}";
         
     </script>
 @endsection

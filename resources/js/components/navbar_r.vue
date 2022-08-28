@@ -15,18 +15,25 @@
             </label> -->
         </div>
         <a class="navbarC">Telegram</a>
-        <a class="navbarC connectWallet" v-on:click="connect_wallet">CONNECT WALLET</a>
+        <a class="navbarC connectWallet" @click="connect_wallet">{{connectWallet}}</a>
     </div>
 </template>
 <script>
     var listenFlag = 0;
+    var connectedFlag = 0;
 
 export default {
     data: function(){
         return{
             language: "EN",
-            langFlag: 0
+            langFlag: 0,
+            connectWallet: "CONNECT WALLET"
         }
+    },
+    mounted: function(){
+        emitter.on("accountChanged", (account)=>{
+            this.connectWallet = account;
+        });
     },
     methods: {
         connect_wallet: async function(){
@@ -115,7 +122,7 @@ export default {
             position: relative;
             justify-content: flex-start;
             align-items: center;
-            margin-top: 20vw;
+            margin-top: 19.3vw;
         }
         .language{
             display: inline-block;

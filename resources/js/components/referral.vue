@@ -9,7 +9,7 @@
                 <div v-html="items.right"></div>
             </div>
             <div class="MBContent referralContent" style="justify-content:center;">
-                <div class="button">
+                <div class="button" @click="onWithdrawRewards">
                     WITHDRAW REWARDS
                 </div>
             </div>
@@ -39,19 +39,42 @@
     </div>
 </template>
 <script>
+
 var referral_reward = 0, total_referral_withdrawn = 0;
+
+async function get_referral_data(){
+    var data = await get_msg_referral();
+    referral_reward = data[0];
+    total_referral_withdrawn = data[1];
+}
+
 export default {
     data() {
         return {
             referral:{}
         }
     },
-    created() {
+    mounted: async function(){
         this.referral = [
             {left: "Referral Reward", right: `${referral_reward}&ensp;BUSD`},
             {left: "Total Withdrawn", right: `${total_referral_withdrawn}&ensp;BUSD`}
         ]
+
+        emitter.on("accountChanged", ()=>{
+            get_referral_data();
+        });
+        
     },
+    methods: {
+        onWithdrawRewards: async function(){
+            await withdraw_referral();
+            await get_referral_data();
+            this.referral = [
+                {left: "Referral Reward", right: `${referral_reward}&ensp;BUSD`},
+                {left: "Total Withdrawn", right: `${total_referral_withdrawn}&ensp;BUSD`}
+            ]
+        }
+    }
 }
 </script>
 <style lang="scss">

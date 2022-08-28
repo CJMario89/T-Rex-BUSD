@@ -29,11 +29,16 @@
 </template>
 
 <script>
+
+
+
     const APP_NAME = 'TREXBUSD';
     const APP_LOGO_URL = window.location.hostname;
-    const JSONRPC_URL = "https://hardworking-divine-ensemble.bsc.discover.quiknode.pro/43958efedb5ffdfbb03ed542992a33da7b09a51f/";
-    const CHAIN_ID = 56;
-    var web3;
+    // const JSONRPC_URL = "https://hardworking-divine-ensemble.bsc.discover.quiknode.pro/43958efedb5ffdfbb03ed542992a33da7b09a51f/";
+    // const CHAIN_ID = 56;
+    const JSONRPC_URL = "https://special-young-spree.bsc-testnet.discover.quiknode.pro/1ced5f728c8c04d6f10b2709d9c03606b0e6ae13/";
+    const CHAIN_ID = 97;
+    
 
     function show_wait_page(provider){
         document.documentElement.insertAdjacentHTML("beforeend", `<div class="waitPage">Waiting ${provider} Connect</div>`);
@@ -43,6 +48,29 @@
         document.querySelector(".waitPage").remove();
     }
 
+
+    function walletListener(provider, account){
+        provider.on("accountsChanged", function(){
+            console.log(provider);
+            console.log(account);
+            emitter.emit('accountChanged', account);
+            createContract();
+            createToken();
+        });
+            console.log(account);
+    }
+
+    async function createContract(){
+        const raw_abi = await fetch("/trexbusd.abi");
+        const abi = await raw_abi.json();
+        contract = await new web3.eth.Contract(abi, contract_addrress);
+    }
+
+    async function createToken(){
+        const raw_abi = await fetch("/busd.abi");
+        const abi = await raw_abi.json();
+        var token = await new web3.eth.Contract(abi, BUSD_Address);
+    }
     
     export default {
         data() {
@@ -56,8 +84,15 @@
                 try{
                     web3 = await new Web3(window.ethereum);
                     var accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    console.log(accounts[0])
+                    account = accounts[0];
+                    await window.ethereum.request({
+                        method: 'wallet_switchEthereumChain',
+                        params: [{ chainId: web3.utils.toHex(97) }]
+                    });
+                    console.log(account);
+                    walletListener(window.ethereum, account);
                 }catch(e){
+                    console.log(e);
                 }
                 remove_wait_page();
             },
@@ -66,7 +101,8 @@
                 show_wait_page("WalletConnect");
                 const provider = new WalletConnectProvider({
                     rpc: {
-                        56: `https://hardworking-divine-ensemble.bsc.discover.quiknode.pro/43958efedb5ffdfbb03ed542992a33da7b09a51f/`
+                        // 56: `https://hardworking-divine-ensemble.bsc.discover.quiknode.pro/43958efedb5ffdfbb03ed542992a33da7b09a51f/`
+                        97: `https://special-young-spree.bsc-testnet.discover.quiknode.pro/1ced5f728c8c04d6f10b2709d9c03606b0e6ae13/`
                     },
                     chainId: CHAIN_ID
                 });
@@ -75,7 +111,10 @@
                     var web3 = await new Web3(provider);
                     var accounts = await web3.eth.getAccounts();
                     console.log(accounts);
+                    account = accounts[0];
+                    walletListener(provider, account);
                 }catch(e){
+                    console.log(e);
                 }
                 remove_wait_page();
             },
@@ -95,7 +134,11 @@
                     web3 = await new Web3(provider);
                     var accounts = await provider.request({ method: 'eth_requestAccounts' });
                     console.log(accounts[0])
+                    account = accounts[0];
+                    walletListener(provider, account);
+                    // walletListener(window.ethereum, account);
                 }catch(e){
+                    console.log(e);
                 }
                 remove_wait_page();
             }

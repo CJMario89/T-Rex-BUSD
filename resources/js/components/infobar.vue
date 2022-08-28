@@ -6,27 +6,28 @@
         </div>
         <div class="infobarC">
             <span>DAILY ROI</span>
-            <span>{{daily_roi}}%</span>
+            <span>{{daily_roi_rate}}%</span>
         </div>
         <div class="infobarC">
             <span>WITHDRAW FEE</span>
-            <span>{{withdraw_fee}}%</span>
+            <span>{{withdraw_fee_rate}}%</span>
         </div>
         <div class="infobarC">
             <span>DEPOSIT FEE</span>
-            <span>MARKET {{deposit_fee_market}}% + DEV {{deposit_fee_dev}}%</span>
+            <span>MARKET {{deposit_fee_market_rate}}% + DEV {{deposit_fee_dev_rate}}%</span>
         </div>
     </div>
 </template>
 <script>
+
 export default {
     data: function(){
         return {
             contract_balance: '',
-            daily_roi: 10,
-            withdraw_fee: 6,
-            deposit_fee_market: 4,
-            deposit_fee_dev: 2
+            daily_roi_rate: 10,
+            withdraw_fee_rate: 6,
+            deposit_fee_market_rate: 4,
+            deposit_fee_dev_rate: 2
         }
     }
 }
