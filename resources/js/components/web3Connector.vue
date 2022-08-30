@@ -30,7 +30,9 @@
 
 <script>
 
-
+    const BUSD_Address = "0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee";
+    //const BUSD_Address = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
+    const contract_address = "0x61a3890E4B43ca3CA9F0E0e661C57a20239d4161";
 
     const APP_NAME = 'TREXBUSD';
     const APP_LOGO_URL = window.location.hostname;
@@ -49,27 +51,31 @@
     }
 
 
-    function walletListener(provider, account){
+    async function walletListener(provider, account){
         provider.on("accountsChanged", function(){
             console.log(provider);
             console.log(account);
             emitter.emit('accountChanged', account);
-            createContract();
-            createToken();
         });
-            console.log(account);
+
+        console.log("connect");
+        const contract = await createContract();
+        const token = await createToken();
+        emitter.emit('accountChanged', {"account":account, "contract":contract, "token":token, "contract_address": contract_address});
     }
 
     async function createContract(){
         const raw_abi = await fetch("/trexbusd.abi");
         const abi = await raw_abi.json();
-        contract = await new web3.eth.Contract(abi, contract_addrress);
+        const contract = await new web3.eth.Contract(abi, contract_address);
+        return contract;
     }
 
     async function createToken(){
         const raw_abi = await fetch("/busd.abi");
         const abi = await raw_abi.json();
-        var token = await new web3.eth.Contract(abi, BUSD_Address);
+        const token = await new web3.eth.Contract(abi, BUSD_Address);
+        return token;
     }
     
     export default {

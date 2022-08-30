@@ -39,7 +39,7 @@ import mitt from 'mitt';
 window.emitter = mitt();
 
 
-import {stake, unstake, daily_claim, weekly_withdraw, withdraw_referral, get_msg_dailyClaim, get_msg_deposit, get_msg_referral, get_msg_status, get_msg_weeklywithdraw, get_trexbusd_data} from '/js/contract';
+// import {stake, unstake, daily_claim, weekly_withdraw, withdraw_referral, get_msg_dailyClaim, get_msg_deposit, get_msg_referral, get_msg_status, get_msg_weeklywithdraw, get_trexbusd_data} from '/js/contract';
 
 Vue.createApp({
     components: {

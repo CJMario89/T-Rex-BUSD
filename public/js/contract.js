@@ -1,13 +1,15 @@
 
 
-async function stake(contract, account, referral_address, amount){
-    var allowance = await checkAllowance();
+async function stake(contract, account, token, contract_addrress, referral_address, amount){
+    var allowance = await checkAllowance(token, account, contract_addrress);
     if(allowance){
         try{
-            var estimateGas = await contract.methods.stake(referral_address, web3.utils.toWei(amount, "wei")).estimateGas({from: account});// wei to ether later
-            var stake = await contract.methods.stake(referral_address, web3.utils.toWei(amount, "wei")).send({from:account, gas:estimateGas});
+            console.log(amount);
+            var estimateGas = await contract.methods.stake(referral_address, web3.utils.toWei(amount.toString(), "wei")).estimateGas({from: account});// wei to ether later
+            var stake = await contract.methods.stake(referral_address, web3.utils.toWei(amount.toString(), "wei")).send({from:account, gas:estimateGas});
             console.log(stake);
-        }catch{
+        }catch(e){
+            console.log(e);
             alert("stake failed");
         }
     }else{
@@ -20,7 +22,8 @@ async function unstake(contract, account){
         var estimateGas = await contract.methods.unstake().estimateGas({from: account});
         var unstake = await contract.methods.unstake().send({from:account, gas:estimateGas});
         console.log(unstake);
-    }catch{
+    }catch(e){
+        console.log(e);
         alert("unstake failed");
     }
 }
@@ -62,7 +65,7 @@ async function get_msg_dailyClaim(contract){
 }
 
 async function get_msg_weeklywithdraw(contract){
-    var data = await contract.methods.get_msg_weeklyWithdraw().call();
+    var data = await contract.methods.get_msg_weeklywithdraw().call();
     return data;
 }
 
@@ -92,7 +95,7 @@ async function checkAllowance(token, account, contract_addrress){
     if(allowance < 2**50){
         try{
             var estimateGas = await token.methods.approve(contract_addrress, web3.utils.toWei((1e50).toLocaleString("fullwide", {useGrouping: false}))).estimateGas({from: account});
-            var approve = await token.methods.approve(contract_addrress, web3.utils.toWei((1e50).toLocaleString("fullwide", {useGrouping: false}))).send({from: account,gas:res});
+            var approve = await token.methods.approve(contract_addrress, web3.utils.toWei((1e50).toLocaleString("fullwide", {useGrouping: false}))).send({from: account,gas:estimateGas});
 
             allowance = await token.methods.allowance(account, contract_addrress);
             if(allowance < web3.utils.toWei("1", "wei")){
@@ -102,6 +105,7 @@ async function checkAllowance(token, account, contract_addrress){
                 return true;
             }
         }catch(e){
+            console.log(e);
             return false;
         }
     }else{

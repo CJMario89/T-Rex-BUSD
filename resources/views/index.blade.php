@@ -182,13 +182,13 @@
     </div>
     <div id= "middleBlock">
         <div id="investment-portal">
-            <investment-portal></investment-portal>
+            <investment-portal referral_address="{{isset($referral_address) ? $referral_address : '0x5120378D83A455dB9DC7b5F22874eC26e56FC768'}}"></investment-portal>
         </div>
         <div id="statistics">
             <statistics></statistics>
         </div>
         <div id="referral">
-            <referral></referral>
+            <referral referral_address="{{isset($referral_address) ? "https://rex-busd.finance/?".$referral_address : 'https://rex-busd.finance/?0x5120378D83A455dB9DC7b5F22874eC26e56FC768'}}"></referral>
         </div>
     </div>
     <div id="investment-calculator">
@@ -205,12 +205,6 @@
         var account;
         var token;
         var contract;
-
-
-
-        const BUSD_Address = "0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee";
-        //const BUSD_Address = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
-        const referral_address = "{{$referral_address}}";
         
     </script>
 @endsection

@@ -22,7 +22,7 @@
                 REFERRAL LINK
             </div>
             <div class="MBContent referralContent" style="padding-top:1vw;padding-bottom: 0vw;">
-                <input class="inputBlock" type="text" value="https://t-rexbusd/?ref=0x00" style="width:100%;" disabled>
+                <input class="inputBlock" type="text" v-bind:value="referral_address" style="width:100%;" disabled>
             </div>
             <div class="MBContent referralContent" style="justify-content:center;padding-top:1vw;padding-bottom: 0vw;">
                 <div class="button">
@@ -39,40 +39,50 @@
     </div>
 </template>
 <script>
+import {withdraw_referral, get_msg_referral} from '/js/contract';
 
-var referral_reward = 0, total_referral_withdrawn = 0;
+var contract;
 
-async function get_referral_data(){
-    var data = await get_msg_referral();
-    referral_reward = data[0];
-    total_referral_withdrawn = data[1];
-}
+
 
 export default {
     data() {
         return {
-            referral:{}
+            referral:{},
+            referral_reward: 0,
+            total_referral_withdrawn: 0,
         }
+    },
+    props:{
+        referral_address: String
     },
     mounted: async function(){
         this.referral = [
-            {left: "Referral Reward", right: `${referral_reward}&ensp;BUSD`},
-            {left: "Total Withdrawn", right: `${total_referral_withdrawn}&ensp;BUSD`}
+            {left: "Referral Reward", right: `${this.referral_reward}&ensp;BUSD`},
+            {left: "Total Withdrawn", right: `${this.total_referral_withdrawn}&ensp;BUSD`}
         ]
 
-        emitter.on("accountChanged", ()=>{
-            get_referral_data();
+        emitter.on("accountChanged", (obj)=>{
+            contract = obj.contract;
+            this.get_referral_data();
         });
+
+        console.log(this.referral_address)
         
     },
     methods: {
         onWithdrawRewards: async function(){
             await withdraw_referral();
-            await get_referral_data();
+            await this.get_referral_data();
             this.referral = [
-                {left: "Referral Reward", right: `${referral_reward}&ensp;BUSD`},
-                {left: "Total Withdrawn", right: `${total_referral_withdrawn}&ensp;BUSD`}
+                {left: "Referral Reward", right: `${this.referral_reward}&ensp;BUSD`},
+                {left: "Total Withdrawn", right: `${this.total_referral_withdrawn}&ensp;BUSD`}
             ]
+        },
+        get_referral_data: async function(){
+            var data = await get_msg_referral(contract);
+            this.referral_reward = data[0];
+            this.total_referral_withdrawn = data[1];
         }
     }
 }

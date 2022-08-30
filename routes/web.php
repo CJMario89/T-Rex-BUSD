@@ -15,9 +15,10 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function (Request $request) {
-    $referral_address = "0x00";
     if($request->query("referral_address") != null){
         $referral_address = $request->query("referral_address");
+        return view('index', ['referral_address' => $referral_address]);
+    }else{
+        return view('index');
     }
-    return view('index', ['referral_address' => $referral_address]);
 });

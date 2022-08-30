@@ -8,7 +8,7 @@
         </div>
         <div class="langContainer" style="display:none;">
             <label>
-                EN<input type="radio" value="EN" v-model="language">
+                EN<input type="radio" v-model="language">
             </label>
             <!-- <label>
                 中文<input type="radio" value="中文" v-model="language">
@@ -19,6 +19,7 @@
     </div>
 </template>
 <script>
+    
     var listenFlag = 0;
     var connectedFlag = 0;
 
@@ -31,8 +32,8 @@ export default {
         }
     },
     mounted: function(){
-        emitter.on("accountChanged", (account)=>{
-            this.connectWallet = account;
+        emitter.on("accountChanged", (obj)=>{
+            this.connectWallet = obj.account;
         });
     },
     methods: {
@@ -114,6 +115,13 @@ export default {
                 display: none;
             }
         }
+    }
+    .connectWallet{
+        width: 10vw;
+        overflow: scroll;
+    }
+    .connectWallet::-webkit-scrollbar{
+        display: none;
     }
     @media screen and (max-width:821px) {
         .navbarR{

@@ -4,10 +4,30 @@
             INVESTMENT PORTAL
         </div>
         <div class="MBC">
-            <div class="MBContent" v-for="(items, key) in investment_portal" :key="key">
-                <div v-html="items.left"></div>
-                <div v-html="items.right"></div>
-            </div>                
+            <div class="MBContent">
+                <span>Wallet Balance</span>
+                <span>{{wallet_balance}}BUSD</span>
+            </div>
+            <div class="MBContent">
+                <span>User Invested</span>
+                <span>{{user_invested}}BUSD</span>
+            </div>
+            <div class="MBContent">
+                <span>5x Profit</span>
+                <span>{{profit_5x}}BUSD</span>
+            </div>
+            <div class="MBContent">
+                <span>5x Remaining</span>
+                <span>{{remaining_5x}}BUSD</span>
+            </div>
+            <div class="MBContent">
+                <span>Daily User ROI</span>
+                <span>{{daily_user_roi}}BUSD</span>
+            </div>
+            <div class="MBContent">
+                <input type='text' class='inputBlock' placeholder='BUSD' v-model='approved_amount'>
+                <div class='button' @click="onStake">APPROVE</div>
+            </div>
             <div class="MBContent" style="justify-content:center">
                 <div class='button' @click="onEmergencyWithdraw">EMERGENCY WITHDRAW</div>
             </div>
@@ -15,67 +35,59 @@
     </div>
 </template>
 <script>
+import {stake, unstake, get_msg_deposit} from '/js/contract';
 
 
-var wallet_balance = 0, user_invested = 0, profit_5x = 0, remaining_5x = 0, daily_user_roi = 0;
+var contract;
+var account;
+var token;
+var contract_address;
 
-async function get_deposit_data(){
-    var data = await get_msg_deposit();
-    wallet_balance = data[0];
-    user_invested = data[1];
-    profit_5x = data[2];
-    remaining_5x = data[3];
-    daily_user_roi = data[4];
-}
+
 
 
 export default {
     data() {
         return {
-            investment_portal:{},
-            approved_amount: 50
+            wallet_balance: 0,
+            user_invested: 0, 
+            profit_5x: 0,
+            remaining_5x: 0,
+            daily_user_roi: 0,
+            approved_amount: 50,
+
         }
     },
+    props:{
+        referral_address: String
+    },
     mounted: async function(){
-        this.investment_portal = {
-            "WB":{left: "<span>Wallet Balance</span>", right: `<span>${wallet_balance}BUSD</span>`},
-            "UI":{left: "<span>User Invested</span>", right: `<span>${user_invested}BUSD</span>`},
-            "P5X":{left: "<span>5x Profit</span>", right: `<span>${profit_5x}BUSD</span>`},
-            "R5X":{left: "<span>5x Remaining</span>", right: `<span>${remaining_5x}BUSD</span>`},
-            "DUR":{left: "<span>Daily User ROI</span>", right: `<span>${daily_user_roi}BUSD</span>`},
-            "APR":{left: "<input type='text' class='inputBlock' placeholder='BUSD' v-model='approved_amount'>", right: `<div class='button' @click="onStake">APPROVE</div>`}
-        }
-        emitter.on("accountChanged", ()=>{
-            get_deposit_data();
+        emitter.on("accountChanged", (obj)=>{
+            contract = obj.contract;
+            token = obj.token;
+            account = obj.account;
+            contract_address = obj.contract_address;
+            this.get_deposit_data();
         });
     },
     methods:{
         onEmergencyWithdraw: async function(){
-            await unstake();
-            await get_statistics_data();
-            await get_deposit_data();
-            this.investment_portal = {
-                "WB":{left: "<span>Wallet Balance</span>", right: `<span>${wallet_balance}BUSD</span>`},
-                "UI":{left: "<span>User Invested</span>", right: `<span>${user_invested}BUSD</span>`},
-                "P5X":{left: "<span>5x Profit</span>", right: `<span>${profit_5x}BUSD</span>`},
-                "R5X":{left: "<span>5x Remaining</span>", right: `<span>${remaining_5x}BUSD</span>`},
-                "DUR":{left: "<span>Daily User ROI</span>", right: `<span>${daily_user_roi}BUSD</span>`},
-                "APR":{left: "<input type='text' class='inputBlock' placeholder='BUSD' value='50'>", right: `<div class='button'>APPROVE</div>`}
-            }
+            await unstake(contract, account);
+            emitter.emit("statistics");
+            await this.get_deposit_data();
         },
         onStake: async function(){
-            console.log("stake");
-            await stake(referral_address, this.approved_amount);
-            await get_statistics_data();
-            await get_deposit_data();
-            this.investment_portal = {
-                "WB":{left: "<span>Wallet Balance</span>", right: `<span>${wallet_balance}BUSD</span>`},
-                "UI":{left: "<span>User Invested</span>", right: `<span>${user_invested}BUSD</span>`},
-                "P5X":{left: "<span>5x Profit</span>", right: `<span>${profit_5x}BUSD</span>`},
-                "R5X":{left: "<span>5x Remaining</span>", right: `<span>${remaining_5x}BUSD</span>`},
-                "DUR":{left: "<span>Daily User ROI</span>", right: `<span>${daily_user_roi}BUSD</span>`},
-                "APR":{left: "<input type='text' class='inputBlock' placeholder='BUSD' value='50'>", right: `<div class='button'>APPROVE</div>`}
-            }
+            await stake(contract, account, token, contract_address, this.referral_address, this.approved_amount);
+            emitter.emit("statistics");
+            await this.get_deposit_data();
+        },
+        get_deposit_data: async function(){
+            var data = await get_msg_deposit(contract);
+            this.wallet_balance = data[0];
+            this.user_invested = data[1];
+            this.profit_5x = data[2];
+            this.remaining_5x = data[3];
+            this.daily_user_roi = data[4];
         }
     }
 }
