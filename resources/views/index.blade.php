@@ -60,6 +60,30 @@
             width: 90%;
             margin-top: 1%;
         }
+        #alert-message{
+            position: fixed;
+            display: block;
+            width: 10vw;
+            padding: 2vw;
+            padding-left: 10vw;
+            padding-right: 10vw;
+            height: auto;
+            font-size: 2vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            background-color: black;
+            opacity: 0.8;
+            right: 0px;
+            bottom: 0px;
+            transform: translate(100%, 0%);
+            transition: all 1s ease-in-out;
+            z-index: 100;
+        }
+        .showAlertMessage{
+            transform: translateX(0%) !important;
+        }
 
         @media screen and (max-width:821px){
             #navbar{
@@ -122,7 +146,8 @@
                 position: relative;
                 flex-direction: column;
                 justify-content: space-around;
-                margin: 5vw;
+                margin: 3vw;
+                margin-top: 5vw;
                 width: 90vw;
                 height: auto;
                 padding: 2vw;
@@ -154,15 +179,20 @@
                 display: block;
                 position: relative;
                 margin: -2vw;
-                margin-left: 7vw;
+                margin-left: 5vw;
                 width: 92vw;
                 padding-bottom: 2vw;
             }
+            #alert-message{
+                width: 10vw;
+            }
+            
         }
     </style>
 @endsection
 
 @section('body')
+    <div id="alert-message"></div>
     <div id="contract">
         <contract></contract>
     </div>

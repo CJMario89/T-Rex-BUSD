@@ -2,7 +2,7 @@
     <div class="infobar">
         <div class="infobarC">
             <span>CONTRACT BALANCE</span>
-            <span>{{contract_balance}}BUSD</span>
+            <span>{{contract_balance}}&ensp;BUSD</span>
         </div>
         <div class="infobarC">
             <span>DAILY ROI</span>
@@ -20,14 +20,43 @@
 </template>
 <script>
 
+import {rexbusd_data, contract_balance} from "/js/contract";
+
+var contract;
+
 export default {
     data: function(){
         return {
             contract_balance: '',
-            daily_roi_rate: 10,
+            daily_roi_rate: 20,
             withdraw_fee_rate: 6,
             deposit_fee_market_rate: 4,
             deposit_fee_dev_rate: 2
+        }
+    },
+    mounted: async function(){
+        const rex_web3 = await new Web3(new Web3.providers.HttpProvider('https://special-young-spree.bsc-testnet.discover.quiknode.pro/1ced5f728c8c04d6f10b2709d9c03606b0e6ae13/'));
+        const raw_abi = await fetch("/rexbusd.abi");
+        const abi = await raw_abi.json();
+        contract = await new rex_web3.eth.Contract(abi, "0x318ae95a4fdE17Ea7561d681DfC0B6296a940aDa");
+
+        emitter.on("info", ()=>{
+            this.get_contract_balance();
+        });
+        this.get_rexbusd_data();
+        this.get_contract_balance();
+    },
+    methods:{
+        get_rexbusd_data: async function(){
+            var data = await rexbusd_data(contract);
+            this.daily_roi_rate = data[1];
+            this.withdraw_fee_rate = data[2];
+            this.deposit_fee_market_rate = data[3];
+            this.deposit_fee_dev_rate = data[4];
+        },
+        get_contract_balance: async function(){
+            var data = await contract_balance(contract);
+            this.contract_balance = data;
         }
     }
 }

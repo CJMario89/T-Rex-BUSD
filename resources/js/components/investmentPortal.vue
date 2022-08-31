@@ -6,23 +6,23 @@
         <div class="MBC">
             <div class="MBContent">
                 <span>Wallet Balance</span>
-                <span>{{wallet_balance}}BUSD</span>
+                <span>{{wallet_balance}}&ensp;BUSD</span>
             </div>
             <div class="MBContent">
                 <span>User Invested</span>
-                <span>{{user_invested}}BUSD</span>
+                <span>{{user_invested}}&ensp;BUSD</span>
             </div>
             <div class="MBContent">
                 <span>5x Profit</span>
-                <span>{{profit_5x}}BUSD</span>
+                <span>{{profit_5x}}&ensp;BUSD</span>
             </div>
             <div class="MBContent">
                 <span>5x Remaining</span>
-                <span>{{remaining_5x}}BUSD</span>
+                <span>{{remaining_5x}}&ensp;BUSD</span>
             </div>
             <div class="MBContent">
                 <span>Daily User ROI</span>
-                <span>{{daily_user_roi}}BUSD</span>
+                <span>{{daily_user_roi}}&ensp;BUSD</span>
             </div>
             <div class="MBContent">
                 <input type='text' class='inputBlock' placeholder='BUSD' v-model='approved_amount'>
@@ -39,7 +39,7 @@ import {stake, unstake, get_msg_deposit} from '/js/contract';
 
 
 var contract;
-var account;
+var account = "";
 var token;
 var contract_address;
 
@@ -72,17 +72,42 @@ export default {
     },
     methods:{
         onEmergencyWithdraw: async function(){
+            if(account == ""){
+                alert("Connect wallet first")
+                return;
+            }
+            emitter.emit("request", {"action": "Emergency Withdrawing"});
             await unstake(contract, account);
-            emitter.emit("statistics");
+            emitter.emit("withdraw");
             await this.get_deposit_data();
+            emitter.emit("info");
+            emitter.emit("requestDone");
+            emitter.emit("alert",{"message":"Withdrawed"});
         },
         onStake: async function(){
-            await stake(contract, account, token, contract_address, this.referral_address, this.approved_amount);
-            emitter.emit("statistics");
-            await this.get_deposit_data();
+            if(account == ""){
+                alert("Connect wallet first")
+                return;
+            }
+            emitter.emit("request", {"action": "Staking"});
+            try{
+                await stake(contract, account, token, contract_address, this.referral_address, this.approved_amount);
+                emitter.emit("deposit");
+                await this.get_deposit_data();
+                emitter.emit("info");
+                emitter.emit("alert",{"message":"Staked"});
+            }catch(e){
+                console.log(e);
+                emitter.emit("alert",{"message":e.message});
+            }
+            emitter.emit("requestDone");
         },
         get_deposit_data: async function(){
-            var data = await get_msg_deposit(contract);
+            if(account == ""){
+                return;
+            }
+            var data = await get_msg_deposit(contract, account);
+            console.log(data);
             this.wallet_balance = data[0];
             this.user_invested = data[1];
             this.profit_5x = data[2];

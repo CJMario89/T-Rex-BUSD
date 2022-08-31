@@ -15,13 +15,19 @@
             </label> -->
         </div>
         <a class="navbarC">Telegram</a>
-        <a class="navbarC connectWallet" @click="connect_wallet">{{connectWallet}}</a>
+        <a class="navbarC connectWallet" @click="connect_wallet">{{connectWallet}}
+            <div class="disconnectContainer">
+                <div class="disconnectWallet" @click.stop="disconnect">disconnect</div>
+            </div>
+        </a>
     </div>
 </template>
 <script>
+
     
-    var listenFlag = 0;
     var connectedFlag = 0;
+    var disconnectedFlag = 0;
+    var account = "";
 
 export default {
     data: function(){
@@ -33,21 +39,38 @@ export default {
     },
     mounted: function(){
         emitter.on("accountChanged", (obj)=>{
-            this.connectWallet = obj.account;
+            if(obj.account == ""){
+                this.connectWallet = "CONNECT WALLET"
+            }else{
+                this.connectWallet = obj.account.slice(0, 8) + "......" + obj.account.slice(-5);
+            }
+            account = obj.account;
         });
     },
     methods: {
         connect_wallet: async function(){
-            document.querySelector(".providerContainer").style.display = "flex";
-            if(!listenFlag){
-                window.addEventListener("click", function(e){
-                    if(e.target.closest(".navbarC") == null){
-                        document.querySelector(".providerContainer").style.display = "none";
-                    }
-                });
-                listenFlag = 1;
+            if(account == ""){
+                document.querySelector(".providerContainer").style.display = "flex";
+                if(!connectedFlag){
+                    window.addEventListener("click", function(e){
+                        if(e.target.closest(".navbarC") == null){
+                            document.querySelector(".providerContainer").style.display = "none";
+                        }
+                    });
+                    connectedFlag = 1;
+                }
+            }else{
+                document.querySelector(".disconnectWallet").style.display = "flex";
+                if(!disconnectedFlag){
+                    //
+                    window.addEventListener("click", function(e){
+                        if(e.target.closest(".connectWallet") == null){
+                            document.querySelector(".disconnectWallet").style.display = "none";
+                        }
+                    });
+                    disconnectedFlag = 1;
+                }
             }
-
         },
 
         toggleLanguage: function(){
@@ -62,6 +85,11 @@ export default {
                 });
                 this.langFlag = 1;
             }
+        },
+
+        disconnect: function(){
+            document.querySelector(".disconnectWallet").style.display = "none";
+            emitter.emit("disconnect");
         }
     }
 }
@@ -116,12 +144,24 @@ export default {
             }
         }
     }
-    .connectWallet{
-        width: 10vw;
-        overflow: scroll;
+    .disconnectContainer{
+        position: absolute;
+        display: block;
+        top: 3.5vw;
+        right: 2vw;
     }
-    .connectWallet::-webkit-scrollbar{
+    .disconnectWallet{
+        width: 100%;
+        height: 100%;
         display: none;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        background-color: #794DFD;
+        font-size: 1vw;
+        padding: 0.5vw;
+        border-radius: 1vw;
     }
     @media screen and (max-width:821px) {
         .navbarR{

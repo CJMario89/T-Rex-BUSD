@@ -5,8 +5,8 @@
         </div>
         <div class="MBC">
             <div class="MBContent">
-                <span>Daily Rewards <br> {{daily_reward}}BUSD</span>
-                <div class="button" onClick='onDailyClaim'>CLAIM</div>
+                <span>Daily Rewards <br> {{daily_reward}}&ensp;BUSD</span>
+                <div class="button" @click='onDailyClaim'>CLAIM</div>
             </div>
             <div class="MBContent">
                 <span>Last Claim <br> {{last_claim}} <br></span>
@@ -14,7 +14,7 @@
             </div>
             <div class="MBContent">
                 <span>Available Withdrawal 50% Allowed <br> {{available_withdraw}}&ensp;BUSD</span>
-                <div class="button" style="padding: 1vw" onClick='onWeeklyWithdraw'>WITHDRAW</div>
+                <div class="button" style="padding: 1vw" @click='onWeeklyWithdraw'>WITHDRAW</div>
             </div>
             <div class="MBContent">
                 <span>Last Withdraw <br> {{last_withdraw}} <br></span>
@@ -29,11 +29,11 @@
     </div>
 </template>
 <script>
-import {daily_claim, weekly_withdraw, get_msg_dailyClaim, get_msg_weeklywithdraw, get_msg_status} from '/js/contract';
+import {daily_claim, weekly_withdraw, get_msg_dailyClaim, get_msg_weeklyWithdraw, get_msg_status} from '/js/contract';
 
 
 var contract;
-var account;
+var account = "";
 
 // const DRP = function(){ Promise(async function(){
 //     Promise.resolve(DR);
@@ -69,33 +69,60 @@ export default {
 
         emitter.on("accountChanged", (obj)=>{
             contract = obj.contract;
+            account = obj.account;
             this.get_statistics_data();
         });
-        emitter.on("statistics", ()=>{
+        emitter.on("deposit", ()=>{
+            this.get_statistics_data();
+        });
+        emitter.on("withdraw", ()=>{
             this.get_statistics_data();
         });
         
     },
     methods:{
         onDailyClaim: async function(){
+            if(account == ""){
+                alert("Connect wallet first")
+                return;
+            }
+            emitter.emit("request", {"action": "Daily Claiming"});
             await daily_claim(contract, account);
-            await get_statistics_data();
+            await this.get_statistics_data();
+            emitter.emit("requestDone");
+            emitter.emit("alert",{"message":"Claimed"});
         },
         onWeeklyWithdraw: async function(){
-            await weekly_withdraw(contract, account);
-            await get_statistics_data();
+            if(account == ""){
+                alert("Connect wallet first")
+                return;
+            }
+            emitter.emit("request", {"action": "Weekly Withdrawing"});
+            try{
+                await weekly_withdraw(contract, account);
+                await this.get_statistics_data();
+                emitter.emit("alert",{"message":"Withdrawed"});
+            }catch(e){
+                console.log(e.data);
+                emitter.emit("alert",{"message":e.data.message});
+            }
+            emitter.emit("requestDone");
+            emitter.emit("info");
         },
         get_statistics_data: async function(){
+            if(account == ""){
+                return;
+            }
             // var data = await Promise.all([DRP, WCP, STATUS]);
-            const DR = await get_msg_dailyClaim(contract);
-            const WC = await get_msg_weeklywithdraw(contract);
-            const ST = await get_msg_status(contract);
+            const DR = await get_msg_dailyClaim(contract, account);
+            const WC = await get_msg_weeklyWithdraw(contract, account);
+            const ST = await get_msg_status(contract, account);
             this.daily_reward = DR[0];
-            this.next_claim = DR[1];
+            this.next_claim = this.timeConverter(DR[1]);
             if(ST[0] == false){//have claimed or not
                 this.last_claim = 0;
             }else{
-                this.last_claim = DR[1] - this.dayToTimeStamp(1);
+                this.last_claim = this.timeConverter(DR[1] - this.dayToTimeStamp(1));
             }
 
             console.log(DR)
@@ -103,16 +130,28 @@ export default {
 
             this.available_withdraw = WC[0];
             this.total_withdrawn = WC[1];
-            this.next_withdraw = WC[2];
+            this.next_withdraw = this.timeConverter(WC[2]);
             if(ST[1] == false){
-                this.last_claim = 0;
+                this.last_withdraw = 0;
             }else{
-                this.last_claim = WC[2] - this.dayToTimeStamp(7);
+                this.last_withdraw = this.timeConverter(WC[2] - this.dayToTimeStamp(7));
             }
         },
         dayToTimeStamp: function(day){
-            var timeStamp = day * 24 * 60 * 60 * 1000;//millisecond
+            var timeStamp = day * 24 * 60 * 60;
             return timeStamp;
+        },
+        timeConverter: function(UNIX_timestamp){
+            var a = new Date(UNIX_timestamp * 1000);
+            var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            var year = a.getFullYear();
+            var month = months[a.getMonth()];
+            var date = a.getDate();
+            var hour = (a.getHours() < 10) ? "0" + a.getHours() : a.getHours();
+            var min = (a.getMinutes() < 10) ? "0" + a.getMinutes() : a.getMinutes();
+            var sec = (a.getSeconds() < 10) ? "0" + a.getSeconds() : a.getSeconds();
+            var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+            return time;
         }
     }
 }

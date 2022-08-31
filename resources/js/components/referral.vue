@@ -22,10 +22,10 @@
                 REFERRAL LINK
             </div>
             <div class="MBContent referralContent" style="padding-top:1vw;padding-bottom: 0vw;">
-                <input class="inputBlock" type="text" v-bind:value="referral_address" style="width:100%;" disabled>
+                <input class="inputBlock referralLink" type="text" v-bind:value="referral_address" style="width:100%;" disabled>
             </div>
             <div class="MBContent referralContent" style="justify-content:center;padding-top:1vw;padding-bottom: 0vw;">
-                <div class="button">
+                <div class="button" @click="copyLink">
                     COPY LINK
                 </div>
             </div>
@@ -42,6 +42,7 @@
 import {withdraw_referral, get_msg_referral} from '/js/contract';
 
 var contract;
+var account = "";
 
 
 
@@ -57,6 +58,8 @@ export default {
         referral_address: String
     },
     mounted: async function(){
+        await this.get_referral_data();
+
         this.referral = [
             {left: "Referral Reward", right: `${this.referral_reward}&ensp;BUSD`},
             {left: "Total Withdrawn", right: `${this.total_referral_withdrawn}&ensp;BUSD`}
@@ -64,25 +67,39 @@ export default {
 
         emitter.on("accountChanged", (obj)=>{
             contract = obj.contract;
+            account = obj.account;
             this.get_referral_data();
         });
-
-        console.log(this.referral_address)
-        
     },
     methods: {
         onWithdrawRewards: async function(){
-            await withdraw_referral();
-            await this.get_referral_data();
+            if(account == ""){
+                alert("Connect wallet first")
+                return;
+            }
+            emitter.emit("request", {"action": "Reward Withdrawing"});
+            await withdraw_referral(contract, account);
+            await this.get_referral_data(account);
+            emitter.emit("requestDone");
+            emitter.emit("info");
+            emitter.emit("alert",{"message":"Withdrawed"});
+        },
+        get_referral_data: async function(){
+            if(account == ""){
+                return;
+            }
+            var data = await get_msg_referral(contract, account);
+            this.referral_reward = data[0];
+            this.total_referral_withdrawn = data[1];
             this.referral = [
                 {left: "Referral Reward", right: `${this.referral_reward}&ensp;BUSD`},
                 {left: "Total Withdrawn", right: `${this.total_referral_withdrawn}&ensp;BUSD`}
             ]
         },
-        get_referral_data: async function(){
-            var data = await get_msg_referral(contract);
-            this.referral_reward = data[0];
-            this.total_referral_withdrawn = data[1];
+        copyLink: async function(e){
+            var referral_link = document.querySelector(".referralLink").value;
+            await navigator.clipboard.writeText(referral_link);
+            emitter.emit("alert", {"message": "copied"});
         }
     }
 }

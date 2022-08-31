@@ -32,7 +32,7 @@
 
     const BUSD_Address = "0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee";
     //const BUSD_Address = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
-    const contract_address = "0x61a3890E4B43ca3CA9F0E0e661C57a20239d4161";
+    const contract_address = "0x318ae95a4fdE17Ea7561d681DfC0B6296a940aDa";
 
     const APP_NAME = 'TREXBUSD';
     const APP_LOGO_URL = window.location.hostname;
@@ -50,12 +50,28 @@
         document.querySelector(".waitPage").remove();
     }
 
+    function show_request_page(action){
+        document.documentElement.insertAdjacentHTML("beforeend", `<div class="requestPage">${action} ...</div>`);
+    }
+
+    function remove_request_page(){
+        document.querySelector(".requestPage").remove();
+    }
+
+    function alertClient(message){
+        document.querySelector("#alert-message").innerHTML = message;
+        document.querySelector("#alert-message").classList.add("showAlertMessage");
+        setTimeout(function(){
+            document.querySelector("#alert-message").classList.remove("showAlertMessage");
+        }, 3000);
+    }
 
     async function walletListener(provider, account){
-        provider.on("accountsChanged", function(){
-            console.log(provider);
-            console.log(account);
-            emitter.emit('accountChanged', account);
+        provider.on("accountsChanged", async function(accounts){
+            account = accounts[0];
+            const contract = await createContract();
+            const token = await createToken();
+            emitter.emit('accountChanged', {"account":account, "contract":contract, "token":token, "contract_address": contract_address});
         });
 
         console.log("connect");
@@ -65,7 +81,7 @@
     }
 
     async function createContract(){
-        const raw_abi = await fetch("/trexbusd.abi");
+        const raw_abi = await fetch("/rexbusd.abi");
         const abi = await raw_abi.json();
         const contract = await new web3.eth.Contract(abi, contract_address);
         return contract;
@@ -83,6 +99,21 @@
             return {
             }
         },
+        mounted: function(){
+            emitter.on("disconnect", function(){
+                emitter.emit('accountChanged', {"account":""});
+            });
+            emitter.on("request", function(obj){
+                show_request_page(obj.action);
+            });
+            emitter.on("requestDone", function(){
+                remove_request_page();
+            });
+            emitter.on("alert", function(obj){
+                console.log(obj);
+                alertClient(obj.message);
+            });
+        },
         methods:{
             Metamask: async function(){
                 show_wait_page("Metamask");
@@ -95,7 +126,6 @@
                         method: 'wallet_switchEthereumChain',
                         params: [{ chainId: web3.utils.toHex(97) }]
                     });
-                    console.log(account);
                     walletListener(window.ethereum, account);
                 }catch(e){
                     console.log(e);
@@ -200,6 +230,20 @@
         }
     }
     .waitPage{
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        opacity: 0.8;
+        position: fixed;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+        z-index: 2;
+        color: white;
+    }
+    .requestPage{
         width: 100%;
         height: 100%;
         background-color: black;
