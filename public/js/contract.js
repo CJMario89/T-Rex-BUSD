@@ -19,7 +19,7 @@ async function unstake(contract, account){
         var estimateGas = await contract.methods.unstake().estimateGas({from: account});
         var unstake = await contract.methods.unstake().send({from:account, gas:estimateGas});
     } catch (error) {
-        alert(error);
+        throw new error;
     }
     
 }

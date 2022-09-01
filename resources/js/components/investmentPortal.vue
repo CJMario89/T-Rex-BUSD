@@ -104,7 +104,7 @@ export default {
             }catch(e){
                 console.log(e);
                 alert(e);
-                emitter.emit("alert",{"message":e.message});
+                //emitter.emit("alert",{"message":e.message});
             }
             emitter.emit("requestDone");
         },

@@ -93,7 +93,7 @@ export default {
                 emitter.emit("alert",{"message":"Claimed"});
             }catch(e){
                 alert(e);
-                emitter.emit("alert",{"message":e.data.message});
+                //emitter.emit("alert",{"message":e.data.message});
             }
             
             emitter.emit("requestDone");
@@ -109,9 +109,9 @@ export default {
                 await this.get_statistics_data();
                 emitter.emit("alert",{"message":"Withdrawed"});
             }catch(e){
-                console.log(e.data);
+                console.log(e);
                 alert(e);
-                emitter.emit("alert",{"message":e.data.message});
+                //emitter.emit("alert",{"message":e.data.message});
             }
             emitter.emit("requestDone");
             emitter.emit("info");
