@@ -77,12 +77,17 @@ export default {
                 alert("Connect wallet first")
                 return;
             }
-            emitter.emit("request", {"action": "Reward Withdrawing"});
-            await withdraw_referral(contract, account);
-            await this.get_referral_data(account);
+            try{
+                emitter.emit("request", {"action": "Reward Withdrawing"});
+                await withdraw_referral(contract, account);
+                await this.get_referral_data(account);
+                emitter.emit("info");
+                emitter.emit("alert",{"message":"Withdrawed"});
+            }catch(e){
+                alert(e);
+            }
             emitter.emit("requestDone");
-            emitter.emit("info");
-            emitter.emit("alert",{"message":"Withdrawed"});
+            
         },
         get_referral_data: async function(){
             if(account == ""){

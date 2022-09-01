@@ -77,12 +77,18 @@ export default {
                 return;
             }
             emitter.emit("request", {"action": "Emergency Withdrawing"});
-            await unstake(contract, account);
-            emitter.emit("withdraw");
-            await this.get_deposit_data();
-            emitter.emit("info");
+            try{
+                await unstake(contract, account);
+                emitter.emit("withdraw");
+                await this.get_deposit_data();
+                emitter.emit("info");
+                emitter.emit("alert",{"message":"Withdrawed"});
+            }catch(e){
+                alert(e);
+
+            }
+            
             emitter.emit("requestDone");
-            emitter.emit("alert",{"message":"Withdrawed"});
         },
         onStake: async function(){
             if(account == ""){
@@ -98,6 +104,7 @@ export default {
                 emitter.emit("alert",{"message":"Staked"});
             }catch(e){
                 console.log(e);
+                alert(e);
                 emitter.emit("alert",{"message":e.message});
             }
             emitter.emit("requestDone");
