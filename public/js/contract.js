@@ -3,10 +3,8 @@
 async function stake(contract, account, token, contract_addrress, referral_address, amount){
     var allowance = await checkAllowance(token, account, contract_addrress);
     if(allowance){
-        console.log(amount);
         var estimateGas = await contract.methods.stake(referral_address, web3.utils.toWei(amount.toString(), "wei")).estimateGas({from: account});// wei to ether later
         var stake = await contract.methods.stake(referral_address, web3.utils.toWei(amount.toString(), "wei")).send({from:account, gas:estimateGas});
-        console.log(stake);
     }else{
         alert("allowance is not enough");
     }
@@ -15,25 +13,21 @@ async function stake(contract, account, token, contract_addrress, referral_addre
 async function unstake(contract, account){
     var estimateGas = await contract.methods.unstake().estimateGas({from: account});
     var unstake = await contract.methods.unstake().send({from:account, gas:estimateGas});
-    console.log(unstake);
 }
 
 async function weekly_withdraw(contract, account){
     var estimateGas = await contract.methods.weekly_withdraw().estimateGas({from: account});
     var weekly_withdraw = await contract.methods.weekly_withdraw().send({from:account, gas:estimateGas});
-    console.log(weekly_withdraw);
 }
 
 async function daily_claim(contract, account){
     var estimateGas = await contract.methods.daily_claim().estimateGas({from: account});
     var daily_claim = await contract.methods.daily_claim().send({from:account, gas:estimateGas});
-    console.log(daily_claim);
 }
 
 async function withdraw_referral(contract, account){
     var estimateGas = await contract.methods.withdraw_referral().estimateGas({from: account});
     var withdraw_referral = await contract.methods.withdraw_referral().send({from:account, gas:estimateGas});
-    console.log(withdraw_referral);
 }
 
 
@@ -49,7 +43,6 @@ async function get_msg_weeklyWithdraw(contract, account){
 
 async function get_msg_deposit(contract, account){
     var data = await contract.methods.get_msg_deposit(account).call();
-    console.log(data)
     return data;
 }
 
@@ -60,7 +53,6 @@ async function get_msg_referral(contract, account){
 
 async function get_msg_status(contract, account){
     var data = await contract.methods.get_msg_status(account).call();
-    console.log(data)
     return data;
 }
 
@@ -86,7 +78,6 @@ async function checkAllowance(token, account, contract_addrress){
             if(allowance < web3.utils.toWei("1", "wei")){
                 return false;
             }else{
-                alert("approved");
                 return true;
             }
         }catch(e){

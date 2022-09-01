@@ -1,13 +1,13 @@
 <template>
     <div class="navbarL">
         <a class="logo">
-            <span style="width:20%">
+            <span>
                 <img src="/images/logo.png">
             </span>
-            <span style="width:50%">
+            <span>
                 <img src="/images/T-REXBUSD.png">
             </span>
-            <span style="width:22%" class="logoT2">
+            <span>
                 <img src="/images/T2.png">
             </span>
         </a>
@@ -44,6 +44,15 @@ export default {
                 height: auto;
             }
         }
+        span:nth-child(1){
+            width: 25%;
+        }
+        span:nth-child(2){
+            width: 70%;
+        }
+        span:nth-child(3){
+            width: 0%;
+        }
         .logoT2{
             display: none;
         }
@@ -73,6 +82,15 @@ export default {
                     width: 100%;
                     height: auto;
                 }
+            }
+            span:nth-child(1){
+                width: 20%;
+            }
+            span:nth-child(2){
+                width: 50%;
+            }
+            span:nth-child(3){
+                width: 22%;
             }
             .logoT2{
                 display: block;

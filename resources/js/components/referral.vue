@@ -52,13 +52,12 @@ export default {
             referral:{},
             referral_reward: 0,
             total_referral_withdrawn: 0,
+            referral_address: ''
         }
-    },
-    props:{
-        referral_address: String
     },
     mounted: async function(){
         await this.get_referral_data();
+        this.update_referral_address();
 
         this.referral = [
             {left: "Referral Reward", right: `${this.referral_reward}&ensp;BUSD`},
@@ -69,6 +68,7 @@ export default {
             contract = obj.contract;
             account = obj.account;
             this.get_referral_data();
+            this.update_referral_address();
         });
     },
     methods: {
@@ -100,6 +100,9 @@ export default {
             var referral_link = document.querySelector(".referralLink").value;
             await navigator.clipboard.writeText(referral_link);
             emitter.emit("alert", {"message": "copied"});
+        }, 
+        update_referral_address: function(){
+            this.referral_address = "https://" + window.location.hostname + "/?referral=" + (account == "" ? "0x0000000000000000000000000000000000000000" : account);
         }
     }
 }

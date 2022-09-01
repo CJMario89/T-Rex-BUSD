@@ -32,7 +32,7 @@
 
     const BUSD_Address = "0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee";
     //const BUSD_Address = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
-    const contract_address = "0x318ae95a4fdE17Ea7561d681DfC0B6296a940aDa";
+    const contract_address = "0xB6475E4924e1969CB52E38d37246B233b3d68dF7";
 
     const APP_NAME = 'TREXBUSD';
     const APP_LOGO_URL = window.location.hostname;

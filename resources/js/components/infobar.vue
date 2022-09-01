@@ -23,6 +23,7 @@
 import {rexbusd_data, contract_balance} from "/js/contract";
 
 var contract;
+var contract_address = "0xB6475E4924e1969CB52E38d37246B233b3d68dF7";
 
 export default {
     data: function(){
@@ -38,7 +39,7 @@ export default {
         const rex_web3 = await new Web3(new Web3.providers.HttpProvider('https://special-young-spree.bsc-testnet.discover.quiknode.pro/1ced5f728c8c04d6f10b2709d9c03606b0e6ae13/'));
         const raw_abi = await fetch("/rexbusd.abi");
         const abi = await raw_abi.json();
-        contract = await new rex_web3.eth.Contract(abi, "0x318ae95a4fdE17Ea7561d681DfC0B6296a940aDa");
+        contract = await new rex_web3.eth.Contract(abi, contract_address);
 
         emitter.on("info", ()=>{
             this.get_contract_balance();

@@ -118,11 +118,13 @@ export default {
             const WC = await get_msg_weeklyWithdraw(contract, account);
             const ST = await get_msg_status(contract, account);
             this.daily_reward = DR[0];
-            this.next_claim = this.timeConverter(DR[1]);
+            if(DR[1] != 0){
+                this.next_claim = this.timeConverter(DR[1]);
+            }
             if(ST[0] == false){//have claimed or not
                 this.last_claim = 0;
             }else{
-                this.last_claim = this.timeConverter(DR[1] - this.dayToTimeStamp(1));
+                this.last_claim = this.timeConverter(DR[1] - this.minuteToTimeStamp(1));
             }
 
             console.log(DR)
@@ -130,15 +132,21 @@ export default {
 
             this.available_withdraw = WC[0];
             this.total_withdrawn = WC[1];
-            this.next_withdraw = this.timeConverter(WC[2]);
+            if(WC[2] != 0){
+                this.next_withdraw = this.timeConverter(WC[2]);
+            }
             if(ST[1] == false){
                 this.last_withdraw = 0;
             }else{
-                this.last_withdraw = this.timeConverter(WC[2] - this.dayToTimeStamp(7));
+                this.last_withdraw = this.timeConverter(WC[2] - this.minuteToTimeStamp(5));
             }
         },
         dayToTimeStamp: function(day){
             var timeStamp = day * 24 * 60 * 60;
+            return timeStamp;
+        },
+        minuteToTimeStamp: function(minute){
+            var timeStamp = minute * 60;
             return timeStamp;
         },
         timeConverter: function(UNIX_timestamp){
