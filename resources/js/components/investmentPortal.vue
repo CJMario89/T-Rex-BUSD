@@ -85,7 +85,6 @@ export default {
                 emitter.emit("alert",{"message":"Withdrawed"});
             }catch(e){
                 alert(e);
-
             }
             
             emitter.emit("requestDone");
