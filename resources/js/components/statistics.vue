@@ -34,6 +34,9 @@ import {daily_claim, weekly_withdraw, get_msg_dailyClaim, get_msg_weeklyWithdraw
 
 var contract;
 var account = "";
+var DR;
+var WC;
+var ST;
 
 // const DRP = function(){ Promise(async function(){
 //     Promise.resolve(DR);
@@ -83,7 +86,17 @@ export default {
     methods:{
         onDailyClaim: async function(){
             if(account == ""){
-                alert("Connect wallet first")
+                emitter.emit("alert",{"message":"Connect wallet first"});
+                return;
+            }
+            if(DR[0] == 0){
+                emitter.emit("alert",{"message":"No daily claim BUSD"});
+                return;
+            }
+            if(DR[1]*1000 > Date.now()){
+                var time = new Date(DR[1]*1000 - Date.now());
+                //emitter.emit("alert",{"message":`Daily claim available in ${time.getDate()}days ${time.getHours()}hours ${time.getMinutes()}minutes ${time.getSeconds()}seconds`});
+                emitter.emit("alert",{"message":`Daily claim time has not come yet`});
                 return;
             }
             emitter.emit("request", {"action": "Daily Claiming"});
@@ -92,7 +105,7 @@ export default {
                 await this.get_statistics_data();
                 emitter.emit("alert",{"message":"Claimed"});
             }catch(e){
-                alert(e);
+                emitter.emit("alert",{"message":e});
                 //emitter.emit("alert",{"message":e.data.message});
             }
             
@@ -100,18 +113,27 @@ export default {
         },
         onWeeklyWithdraw: async function(){
             if(account == ""){
-                alert("Connect wallet first")
+                emitter.emit("alert",{"message":"Connect wallet first"});
+                return;
+            }
+            if(WC[0] == 0){
+                emitter.emit("alert",{"message":"No weekly withdraw BUSD"});
+                return;
+            }
+            if(WC[2]*1000 > Date.now()){
+                var time = new Date(WC[2]*1000 - Date.now() / 1000);
+                //emitter.emit("alert",{"message":`Weekly withdraw available in ${time.getDate()}days ${time.getHours()}hours ${time.getMinutes()}minutes ${time.getSeconds()}seconds`});
+                emitter.emit("alert",{"message":`Weekly withdraw time has not come yet`});
                 return;
             }
             emitter.emit("request", {"action": "Weekly Withdrawing"});
             try{
                 await weekly_withdraw(contract, account);
                 await this.get_statistics_data();
+                emitter.emit("wallet_balance");
                 emitter.emit("alert",{"message":"Withdrawed"});
             }catch(e){
-                console.log(e);
-                alert(e);
-                //emitter.emit("alert",{"message":e.data.message});
+                emitter.emit("alert",{"message":e});
             }
             emitter.emit("requestDone");
             emitter.emit("info");
@@ -121,9 +143,9 @@ export default {
                 return;
             }
             // var data = await Promise.all([DRP, WCP, STATUS]);
-            const DR = await get_msg_dailyClaim(contract, account);
-            const WC = await get_msg_weeklyWithdraw(contract, account);
-            const ST = await get_msg_status(contract, account);
+            DR = await get_msg_dailyClaim(contract, account);
+            WC = await get_msg_weeklyWithdraw(contract, account);
+            ST = await get_msg_status(contract, account);
             this.daily_reward = DR[0];
             if(DR[1] != 0){
                 this.next_claim = this.timeConverter(DR[1]);
@@ -134,8 +156,6 @@ export default {
                 this.last_claim = this.timeConverter(DR[1] - this.minuteToTimeStamp(1));
             }
 
-            console.log(DR)
-            console.log(ST)
 
             this.available_withdraw = WC[0];
             this.total_withdrawn = WC[1];

@@ -74,7 +74,11 @@ export default {
     methods: {
         onWithdrawRewards: async function(){
             if(account == ""){
-                alert("Connect wallet first")
+                emitter.emit("alert",{"message":"Connect wallet first"});
+                return;
+            }
+            if(this.referral_reward == 0){
+                emitter.emit("alert",{"message":"No referral reward BUSD"});
                 return;
             }
             try{
@@ -84,7 +88,7 @@ export default {
                 emitter.emit("info");
                 emitter.emit("alert",{"message":"Withdrawed"});
             }catch(e){
-                alert(e);
+                emitter.emit("alert",{"message":e});
             }
             emitter.emit("requestDone");
             

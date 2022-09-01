@@ -32,7 +32,7 @@
 
     const BUSD_Address = "0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee";
     //const BUSD_Address = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
-    const contract_address = "0xB6475E4924e1969CB52E38d37246B233b3d68dF7";
+    const contract_address = "0x0e9C41E19FeF1c75a699bC1c8D60c988970e33B9";
 
     const APP_NAME = 'TREXBUSD';
     const APP_LOGO_URL = window.location.hostname;
@@ -64,6 +64,9 @@
         setTimeout(function(){
             document.querySelector("#alert-message").classList.remove("showAlertMessage");
         }, 3000);
+        setTimeout(function(){
+            document.querySelector("#alert-message").innerHTML = "";
+        }, 4000);
     }
 
     async function walletListener(provider, account){
@@ -74,7 +77,6 @@
             emitter.emit('accountChanged', {"account":account, "contract":contract, "token":token, "contract_address": contract_address});
         });
 
-        console.log("connect");
         const contract = await createContract();
         const token = await createToken();
         emitter.emit('accountChanged', {"account":account, "contract":contract, "token":token, "contract_address": contract_address});
@@ -110,7 +112,6 @@
                 remove_request_page();
             });
             emitter.on("alert", function(obj){
-                console.log(obj);
                 alertClient(obj.message);
             });
         },

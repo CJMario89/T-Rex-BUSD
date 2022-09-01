@@ -26,16 +26,20 @@
             </div>
             <div class="MBContent">
                 <input type='text' class='inputBlock' placeholder='BUSD' v-model='approved_amount'>
-                <div class='button' @click="onStake">APPROVE</div>
+                <div class='button' @click="onApprove">APPROVE</div>
             </div>
-            <div class="MBContent" style="justify-content:center">
+            <div class="MBContent">
+                <input type='text' class='inputBlock' placeholder='BUSD' v-model='deposit_amount'>
+                <div class='button' @click="onDeposit">DEPOSIT</div>
+            </div>
+            <!-- <div class="MBContent" style="justify-content:center">
                 <div class='button' @click="onEmergencyWithdraw">EMERGENCY WITHDRAW</div>
-            </div>
+            </div> -->
         </div> 
     </div>
 </template>
 <script>
-import {stake, unstake, get_msg_deposit} from '/js/contract';
+import {stake, unstake, approve,allowance, get_msg_deposit, get_msg_wallet_balance} from '/js/contract';
 
 
 var contract;
@@ -55,6 +59,7 @@ export default {
             remaining_5x: 0,
             daily_user_roi: 0,
             approved_amount: 50,
+            deposit_amount: 50,
 
         }
     },
@@ -68,43 +73,67 @@ export default {
             account = obj.account;
             contract_address = obj.contract_address;
             this.get_deposit_data();
+            this.get_wallet_balance();
+        });
+        emitter.on("wallet_balance", ()=>{
+            this.get_wallet_balance();
         });
     },
     methods:{
-        onEmergencyWithdraw: async function(){
+        // onEmergencyWithdraw: async function(){
+        //     if(account == ""){
+        //         alert("Connect wallet first")
+        //         return;
+        //     }
+        //     emitter.emit("request", {"action": "Emergency Withdrawing"});
+        //     try{
+        //         await unstake(contract, account);
+        //         emitter.emit("withdraw");
+        //         await this.get_deposit_data();
+        //         await this.get_wallet_balance();
+        //         emitter.emit("info");
+        //         emitter.emit("alert",{"message":"Withdrawed"});
+        //     }catch(e){
+        //         alert(e);
+        //     }
+            
+        //     emitter.emit("requestDone");
+        // },
+        onApprove: async function(){
             if(account == ""){
-                alert("Connect wallet first")
+                emitter.emit("alert",{"message":"Connect wallet first"});
                 return;
             }
-            emitter.emit("request", {"action": "Emergency Withdrawing"});
+            emitter.emit("request", {"action": "Approving"});
             try{
-                await unstake(contract, account);
-                emitter.emit("withdraw");
-                await this.get_deposit_data();
-                emitter.emit("info");
-                emitter.emit("alert",{"message":"Withdrawed"});
+                await approve(token, account, contract_address, this.approved_amount);
+                emitter.emit("alert",{"message":"Approved"});
             }catch(e){
-                alert(e);
+                emitter.emit("alert",{"message":e});
             }
-            
             emitter.emit("requestDone");
+
         },
-        onStake: async function(){
+        onDeposit: async function(){
             if(account == ""){
-                alert("Connect wallet first")
+                emitter.emit("alert",{"message":"Connect wallet first"});
+                return;
+            }
+            var allowAmount = await allowance(token, account, contract_address);
+            if(allowAmount < this.deposit_amount){
+                emitter.emit("alert",{"message":"Approved is not enough"});
                 return;
             }
             emitter.emit("request", {"action": "Staking"});
             try{
-                await stake(contract, account, token, contract_address, this.referral_address, this.approved_amount);
+                await stake(contract, account, token, contract_address, this.referral_address, this.deposit_amount);
                 emitter.emit("deposit");
                 await this.get_deposit_data();
+                await this.get_wallet_balance();
                 emitter.emit("info");
                 emitter.emit("alert",{"message":"Staked"});
             }catch(e){
-                console.log(e);
-                alert(e);
-                //emitter.emit("alert",{"message":e.message});
+                emitter.emit("alert",{"message":e});
             }
             emitter.emit("requestDone");
         },
@@ -113,13 +142,16 @@ export default {
                 return;
             }
             var data = await get_msg_deposit(contract, account);
-            console.log(data);
-            this.wallet_balance = data[0];
-            this.user_invested = data[1];
-            this.profit_5x = data[2];
-            this.remaining_5x = data[3];
-            this.daily_user_roi = data[4];
+            this.user_invested = data[0];
+            this.profit_5x = data[1];
+            this.remaining_5x = data[2];
+            this.daily_user_roi = data[3];
+        },
+        get_wallet_balance: async function(){
+            var data = await get_msg_wallet_balance(account, token);
+            this.wallet_balance = data;
         }
+
     }
 }
 </script>
@@ -129,6 +161,7 @@ export default {
         width: calc(100% - 2vw);
         height: calc(100% - 4vw);
         padding: 2vw 1vw;
+        border-radius: 0.6vw;
         background: #794DFD;
     }
 
