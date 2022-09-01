@@ -7,7 +7,7 @@ async function stake(contract, account, token, contract_addrress, referral_addre
             var estimateGas = await contract.methods.stake(referral_address, web3.utils.toWei(amount.toString(), "wei")).estimateGas({from: account});// wei to ether later
             var stake = await contract.methods.stake(referral_address, web3.utils.toWei(amount.toString(), "wei")).send({from:account, gas:estimateGas});
         } catch (error) {
-            alert(error);
+            throw new error;
         }
     }else{
         alert("allowance is not enough");
@@ -29,7 +29,7 @@ async function weekly_withdraw(contract, account){
         var estimateGas = await contract.methods.weekly_withdraw().estimateGas({from: account});
         var weekly_withdraw = await contract.methods.weekly_withdraw().send({from:account, gas:estimateGas});
     } catch (error) {
-            alert(error);
+        throw new error;
     }
 }
 
@@ -38,7 +38,7 @@ async function daily_claim(contract, account){
         var estimateGas = await contract.methods.daily_claim().estimateGas({from: account});
         var daily_claim = await contract.methods.daily_claim().send({from:account, gas:estimateGas});
     } catch (error) {
-            alert(error);
+        throw new error;
     }
 }
 
@@ -47,7 +47,7 @@ async function withdraw_referral(contract, account){
         var estimateGas = await contract.methods.withdraw_referral().estimateGas({from: account});
         var withdraw_referral = await contract.methods.withdraw_referral().send({from:account, gas:estimateGas});
     } catch (error) {
-            alert(error);
+        throw new error;
     }
 }
 
