@@ -36,7 +36,7 @@ export default {
         }
     },
     mounted: async function(){
-        const rex_web3 = await new Web3(new Web3.providers.HttpProvider('https://special-young-spree.bsc-testnet.discover.quiknode.pro/1ced5f728c8c04d6f10b2709d9c03606b0e6ae13/'));
+        const rex_web3 = await new Web3(new Web3.providers.HttpProvider('https://hardworking-divine-ensemble.bsc.discover.quiknode.pro/43958efedb5ffdfbb03ed542992a33da7b09a51f/'));
         const raw_abi = await fetch("/rexbusd.abi");
         const abi = await raw_abi.json();
         contract = await new rex_web3.eth.Contract(abi, contract_address);
