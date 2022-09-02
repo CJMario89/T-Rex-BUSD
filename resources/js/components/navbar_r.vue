@@ -14,7 +14,7 @@
                 中文<input type="radio" value="中文" v-model="language">
             </label> -->
         </div>
-        <a class="navbarC">Telegram</a>
+        <a class="navbarC" href="https://t.me/+cJ7UDQk4znJlNzZl">Telegram</a>
         <a class="navbarC connectWallet" @click="connect_wallet">{{connectWallet}}
             <div class="disconnectContainer">
                 <div class="disconnectWallet" @click.stop="disconnect">disconnect</div>

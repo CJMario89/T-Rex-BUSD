@@ -27,19 +27,20 @@
             <div class="MBContent">
                 <input type='text' class='inputBlock' placeholder='BUSD' v-model='approved_amount'>
                 <div class='button' @click="onApprove">APPROVE</div>
+                <div class="approveHint">{{approved_hint}}</div>
             </div>
             <div class="MBContent">
                 <input type='text' class='inputBlock' placeholder='BUSD' v-model='deposit_amount'>
                 <div class='button' @click="onDeposit">DEPOSIT</div>
             </div>
-            <!-- <div class="MBContent" style="justify-content:center">
+            <div class="MBContent" style="justify-content:center; display: none;">
                 <div class='button' @click="onEmergencyWithdraw">EMERGENCY WITHDRAW</div>
-            </div> -->
+            </div>
         </div> 
     </div>
 </template>
 <script>
-import {stake, unstake, approve,allowance, get_msg_deposit, get_msg_wallet_balance} from '/js/contract';
+import {stake, unstake, approve, allowance, get_msg_deposit, get_msg_wallet_balance} from '/js/contract';
 
 
 var contract;
@@ -60,7 +61,7 @@ export default {
             daily_user_roi: 0,
             approved_amount: 50,
             deposit_amount: 50,
-
+            approved_hint: ""
         }
     },
     props:{
@@ -74,9 +75,11 @@ export default {
             contract_address = obj.contract_address;
             this.get_deposit_data();
             this.get_wallet_balance();
+            this.checkAllowance();
         });
         emitter.on("wallet_balance", ()=>{
             this.get_wallet_balance();
+            this.get_deposit_data();
         });
     },
     methods:{
@@ -107,7 +110,8 @@ export default {
             emitter.emit("request", {"action": "Approving"});
             try{
                 await approve(token, account, contract_address, this.approved_amount);
-                emitter.emit("alert",{"message":"Approved"});
+                this.checkAllowance();
+                emitter.emit("alert",{"message": "Approved"});
             }catch(e){
                 emitter.emit("alert",{"message":e});
             }
@@ -150,6 +154,10 @@ export default {
         get_wallet_balance: async function(){
             var data = await get_msg_wallet_balance(account, token);
             this.wallet_balance = data;
+        },
+        checkAllowance: async function(){
+            var allowAmount = await allowance(token, account, contract_address);
+            this.approved_hint = `You have approved: ${allowAmount} BUSD`;
         }
 
     }
@@ -164,6 +172,13 @@ export default {
         border-radius: 0.6vw;
         background: #794DFD;
     }
+    .approveHint{
+        position: absolute;
+        display: block;
+        color: #F0BF13;
+        font-size: 1vw;
+        bottom: 0vw;
+    }
 
     @media screen and (max-width: 821px) {
         .investmentPortal{
@@ -174,6 +189,13 @@ export default {
             padding: 2vw 4vw;
             background: #794DFD;
             border: 1px white solid;
+        }
+        .approveHint{
+            position: absolute;
+            display: block;
+            color: #F0BF13;
+            font-size: 3vw;
+            bottom: 0vw;
         }
     }
 

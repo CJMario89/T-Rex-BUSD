@@ -29,17 +29,16 @@
 </template>
 
 <script>
-
-    const BUSD_Address = "0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee";
-    //const BUSD_Address = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
+    //const BUSD_Address = "0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee";
+    const BUSD_Address = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
     const contract_address = "0xf4E7101314C8DFED780930A1f5BFd80dC7509549";
 
     const APP_NAME = 'TREXBUSD';
     const APP_LOGO_URL = window.location.hostname;
-    // const JSONRPC_URL = "https://hardworking-divine-ensemble.bsc.discover.quiknode.pro/43958efedb5ffdfbb03ed542992a33da7b09a51f/";
-    // const CHAIN_ID = 56;
-    const JSONRPC_URL = "https://special-young-spree.bsc-testnet.discover.quiknode.pro/1ced5f728c8c04d6f10b2709d9c03606b0e6ae13/";
-    const CHAIN_ID = 97;
+    const JSONRPC_URL = "https://hardworking-divine-ensemble.bsc.discover.quiknode.pro/43958efedb5ffdfbb03ed542992a33da7b09a51f/";
+    const CHAIN_ID = 56;
+    //const JSONRPC_URL = "https://special-young-spree.bsc-testnet.discover.quiknode.pro/1ced5f728c8c04d6f10b2709d9c03606b0e6ae13/";
+    //const CHAIN_ID = 97;
     
 
     function show_wait_page(provider){
@@ -79,6 +78,8 @@
 
         const contract = await createContract();
         const token = await createToken();
+        console.log(contract)
+        console.log(token)
         emitter.emit('accountChanged', {"account":account, "contract":contract, "token":token, "contract_address": contract_address});
     }
 
@@ -125,7 +126,7 @@
                     account = accounts[0];
                     await window.ethereum.request({
                         method: 'wallet_switchEthereumChain',
-                        params: [{ chainId: web3.utils.toHex(97) }]
+                        params: [{ chainId: web3.utils.toHex(56) }]
                     });
                     walletListener(window.ethereum, account);
                 }catch(e){
@@ -138,14 +139,15 @@
                 show_wait_page("WalletConnect");
                 const provider = new WalletConnectProvider({
                     rpc: {
-                        // 56: `https://hardworking-divine-ensemble.bsc.discover.quiknode.pro/43958efedb5ffdfbb03ed542992a33da7b09a51f/`
-                        97: `https://special-young-spree.bsc-testnet.discover.quiknode.pro/1ced5f728c8c04d6f10b2709d9c03606b0e6ae13/`
+                         56: `https://hardworking-divine-ensemble.bsc.discover.quiknode.pro/43958efedb5ffdfbb03ed542992a33da7b09a51f/`
+                        //97: `https://special-young-spree.bsc-testnet.discover.quiknode.pro/1ced5f728c8c04d6f10b2709d9c03606b0e6ae13/`
                     },
                     chainId: CHAIN_ID
                 });
+                console.log(CHAIN_ID)
                 try{
                     await provider.enable();
-                    var web3 = await new Web3(provider);
+                    web3 = await new Web3(provider);
                     var accounts = await web3.eth.getAccounts();
                     console.log(accounts);
                     account = accounts[0];
