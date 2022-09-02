@@ -66,6 +66,7 @@ export default {
             last_withdraw: 0,
             next_withdraw: 0,
             total_withdrawn: 0
+            //remaining_5x: 0
         }
     },
     mounted: async function() {
@@ -105,7 +106,8 @@ export default {
                 await this.get_statistics_data();
                 emitter.emit("alert",{"message":"Claimed"});
             }catch(e){
-                emitter.emit("alert",{"message":e});
+                emitter.emit("alert",{"message":"Rejected by User"});
+                // emitter.emit("alert",{"message":e});
                 //emitter.emit("alert",{"message":e.data.message});
             }
             
@@ -126,6 +128,16 @@ export default {
                 emitter.emit("alert",{"message":`Weekly withdraw time has not come yet`});
                 return;
             }
+            if(WC[0] == 0){
+                emitter.emit("alert",{"message":"No weekly withdraw BUSD"});
+                return;
+            }
+            // await this.get_remaining5X_data(contract, account);
+            // if(this.remaining_5x <= 0){
+            //     emitter.emit("alert",{"message":"No remaining 5X BUSD"});
+            //     return;
+            // }
+
             emitter.emit("request", {"action": "Weekly Withdrawing"});
             try{
                 await weekly_withdraw(contract, account);
@@ -133,7 +145,8 @@ export default {
                 emitter.emit("wallet_balance");
                 emitter.emit("alert",{"message":"Withdrawed"});
             }catch(e){
-                emitter.emit("alert",{"message":e});
+                emitter.emit("alert",{"message":"Rejected by User"});
+                // emitter.emit("alert",{"message":e});
             }
             emitter.emit("requestDone");
             emitter.emit("info");
@@ -146,7 +159,7 @@ export default {
             DR = await get_msg_dailyClaim(contract, account);
             WC = await get_msg_weeklyWithdraw(contract, account);
             ST = await get_msg_status(contract, account);
-            this.daily_reward = DR[0];
+            this.daily_reward = web3.utils.fromWei(DR[0]);
             if(DR[1] != 0){
                 this.next_claim = this.timeConverter(DR[1]);
             }
@@ -157,8 +170,8 @@ export default {
             }
 
 
-            this.available_withdraw = WC[0];
-            this.total_withdrawn = WC[1];
+            this.available_withdraw = web3.utils.fromWei(WC[0]);
+            this.total_withdrawn = web3.utils.fromWei(WC[1]);
             if(WC[2] != 0){
                 this.next_withdraw = this.timeConverter(WC[2]);
             }
@@ -187,7 +200,14 @@ export default {
             var sec = (a.getSeconds() < 10) ? "0" + a.getSeconds() : a.getSeconds();
             var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
             return time;
-        }
+        },
+        // get_remaining5X_data: async function(){
+        //     if(account == ""){
+        //         return;
+        //     }
+        //     var data = await get_msg_deposit(contract, account);
+        //     this.remaining_5x = web3.utils.fromWei(data[2]);
+        // },
     }
 }
 </script>

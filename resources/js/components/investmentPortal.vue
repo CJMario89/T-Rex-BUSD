@@ -33,9 +33,9 @@
                 <input type='text' class='inputBlock' placeholder='BUSD' v-model='deposit_amount'>
                 <div class='button' @click="onDeposit">DEPOSIT</div>
             </div>
-            <div class="MBContent" style="justify-content:center; display: none;">
+            <!-- <div class="MBContent" style="justify-content:center; display: none;">
                 <div class='button' @click="onEmergencyWithdraw">EMERGENCY WITHDRAW</div>
-            </div>
+            </div> -->
         </div> 
     </div>
 </template>
@@ -113,7 +113,7 @@ export default {
                 this.checkAllowance();
                 emitter.emit("alert",{"message": "Approved"});
             }catch(e){
-                emitter.emit("alert",{"message":e});
+                emitter.emit("alert",{"message":"Rejected by User"});
             }
             emitter.emit("requestDone");
 
@@ -128,6 +128,14 @@ export default {
                 emitter.emit("alert",{"message":"Approved is not enough"});
                 return;
             }
+            if(this.deposit_amount < 50){
+                emitter.emit("alert",{"message":"deposit should be at least 50 BUSD"});
+                return;
+            }
+            if(this.deposit_amount > 100000){
+                emitter.emit("alert",{"message":"deposit should be below 100000 BUSD"});
+                return;
+            }
             emitter.emit("request", {"action": "Staking"});
             try{
                 await stake(contract, account, token, contract_address, this.referral_address, this.deposit_amount);
@@ -135,9 +143,11 @@ export default {
                 await this.get_deposit_data();
                 await this.get_wallet_balance();
                 emitter.emit("info");
+                emitter.emit("referral");
                 emitter.emit("alert",{"message":"Staked"});
             }catch(e){
-                emitter.emit("alert",{"message":e});
+                emitter.emit("alert",{"message":"Rejected by User"});
+                // emitter.emit("alert",{"message":e});
             }
             emitter.emit("requestDone");
         },
@@ -146,18 +156,18 @@ export default {
                 return;
             }
             var data = await get_msg_deposit(contract, account);
-            this.user_invested = data[0];
-            this.profit_5x = data[1];
-            this.remaining_5x = data[2];
-            this.daily_user_roi = data[3];
+            this.user_invested = web3.utils.fromWei(data[0]);
+            this.profit_5x = web3.utils.fromWei(data[1]);
+            this.remaining_5x = web3.utils.fromWei(data[2]);
+            this.daily_user_roi = web3.utils.fromWei(data[3]);
         },
         get_wallet_balance: async function(){
             var data = await get_msg_wallet_balance(account, token);
-            this.wallet_balance = data;
+            this.wallet_balance = web3.utils.fromWei(data, "ether");
         },
         checkAllowance: async function(){
             var allowAmount = await allowance(token, account, contract_address);
-            this.approved_hint = `You have approved: ${allowAmount} BUSD`;
+            this.approved_hint = `You have approved: ${web3.utils.fromWei(allowAmount)} BUSD`;
         }
 
     }

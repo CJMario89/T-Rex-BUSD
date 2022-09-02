@@ -4,8 +4,8 @@ async function stake(contract, account, token, contract_address, referral_addres
     var allowance = await token.methods.allowance(account, contract_address).call();
     if(allowance >= amount){
         try{
-            var estimateGas = await contract.methods.stake(referral_address, web3.utils.toWei(amount.toString(), "wei")).estimateGas({from: account});// wei to ether later
-            var stake = await contract.methods.stake(referral_address, web3.utils.toWei(amount.toString(), "wei")).send({from:account, gas:estimateGas});
+            var estimateGas = await contract.methods.stake(referral_address, web3.utils.toWei(amount.toString(), "ether")).estimateGas({from: account});// wei to ether later
+            var stake = await contract.methods.stake(referral_address, web3.utils.toWei(amount.toString(), "ether")).send({from:account, gas:estimateGas});
         } catch (error) {
             throw error;
         }

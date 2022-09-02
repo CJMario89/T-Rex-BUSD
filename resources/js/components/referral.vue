@@ -70,6 +70,9 @@ export default {
             this.get_referral_data();
             this.update_referral_address();
         });
+        emitter.on("referral", ()=>{
+            this.get_referral_data();
+        });
     },
     methods: {
         onWithdrawRewards: async function(){
@@ -86,9 +89,11 @@ export default {
                 await withdraw_referral(contract, account);
                 await this.get_referral_data(account);
                 emitter.emit("info");
+                emitter.emit("wallet_balance");
                 emitter.emit("alert",{"message":"Withdrawed"});
             }catch(e){
-                emitter.emit("alert",{"message":e});
+                emitter.emit("alert",{"message":"Rejected by User"});
+                // emitter.emit("alert",{"message":e});
             }
             emitter.emit("requestDone");
             
@@ -98,8 +103,8 @@ export default {
                 return;
             }
             var data = await get_msg_referral(contract, account);
-            this.referral_reward = data[0];
-            this.total_referral_withdrawn = data[1];
+            this.referral_reward = web3.utils.fromWei(data[0]);
+            this.total_referral_withdrawn = web3.utils.fromWei(data[1]);
             this.referral = [
                 {left: "Referral Reward", right: `${this.referral_reward}&ensp;BUSD`},
                 {left: "Total Withdrawn", right: `${this.total_referral_withdrawn}&ensp;BUSD`}

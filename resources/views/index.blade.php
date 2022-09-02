@@ -63,7 +63,8 @@
         #alert-message{
             position: fixed;
             display: block;
-            width: 10vw;
+            width: auto;
+            border-radius;
             padding: 2vw;
             padding-left: 10vw;
             padding-right: 10vw;
@@ -74,7 +75,7 @@
             align-items: center;
             color: white;
             background-color: black;
-            opacity: 0.8;
+            opacity: 0.9;
             right: 0px;
             bottom: 0px;
             transform: translate(100%, 0%);
@@ -184,7 +185,7 @@
                 padding-bottom: 2vw;
             }
             #alert-message{
-                width: 10vw;
+                font-size: 5vw;
             }
             
         }
@@ -212,13 +213,13 @@
     </div>
     <div id= "middleBlock">
         <div id="investment-portal">
-            <investment-portal referral_address="{{isset($referral_address) ? $referral_address : '0x5120378D83A455dB9DC7b5F22874eC26e56FC768'}}"></investment-portal>
+            <investment-portal referral_address="{{isset($referral_address) ? $referral_address : '0x0000000000000000000000000000000000000000'}}"></investment-portal>
         </div>
         <div id="statistics">
             <statistics></statistics>
         </div>
         <div id="referral">
-            <referral referral_address="{{isset($referral_address) ? "https://rex-busd.finance/?".$referral_address : 'https://rex-busd.finance/?0x5120378D83A455dB9DC7b5F22874eC26e56FC768'}}"></referral>
+            <referral referral_address="{{isset($referral_address) ? "https://rex-busd.finance/?".$referral_address : 'https://rex-busd.finance/?0x0000000000000000000000000000000000000000'}}"></referral>
         </div>
     </div>
     <div id="investment-calculator">

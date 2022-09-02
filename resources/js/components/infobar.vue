@@ -23,7 +23,8 @@
 import {rexbusd_data, contract_balance} from "/js/contract";
 
 var contract;
-var contract_address = "0xb7789A35DF704CccAae28cCE34C5185F3869BDF4";
+var contract_address = "0x66f86cBAff8A8F68A8f83b4554ECe00976C962DD";
+var rex_web3;
 
 export default {
     data: function(){
@@ -36,7 +37,7 @@ export default {
         }
     },
     mounted: async function(){
-        const rex_web3 = await new Web3(new Web3.providers.HttpProvider('https://hardworking-divine-ensemble.bsc.discover.quiknode.pro/43958efedb5ffdfbb03ed542992a33da7b09a51f/'));
+        rex_web3 = await new Web3(new Web3.providers.HttpProvider('https://hardworking-divine-ensemble.bsc.discover.quiknode.pro/43958efedb5ffdfbb03ed542992a33da7b09a51f/'));
         const raw_abi = await fetch("/rexbusd.abi");
         const abi = await raw_abi.json();
         contract = await new rex_web3.eth.Contract(abi, contract_address);
@@ -57,7 +58,7 @@ export default {
         },
         get_contract_balance: async function(){
             var data = await contract_balance(contract);
-            this.contract_balance = data;
+            this.contract_balance = rex_web3.utils.fromWei(data);
         }
     }
 }

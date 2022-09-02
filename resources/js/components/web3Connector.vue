@@ -31,7 +31,7 @@
 <script>
     //const BUSD_Address = "0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee";
     const BUSD_Address = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
-    const contract_address = "0xb7789A35DF704CccAae28cCE34C5185F3869BDF4";
+    const contract_address = "0x66f86cBAff8A8F68A8f83b4554ECe00976C962DD";
 
     const APP_NAME = 'TREXBUSD';
     const APP_LOGO_URL = window.location.hostname;
@@ -39,6 +39,10 @@
     const CHAIN_ID = 56;
     //const JSONRPC_URL = "https://special-young-spree.bsc-testnet.discover.quiknode.pro/1ced5f728c8c04d6f10b2709d9c03606b0e6ae13/";
     //const CHAIN_ID = 97;
+
+
+    var hideMsg;
+    var clearMsg;
     
 
     function show_wait_page(provider){
@@ -58,14 +62,16 @@
     }
 
     function alertClient(message){
+        clearTimeout(hideMsg);
+        clearTimeout(clearMsg);
         document.querySelector("#alert-message").innerHTML = message;
         document.querySelector("#alert-message").classList.add("showAlertMessage");
-        setTimeout(function(){
+        hideMsg = setTimeout(function(){
             document.querySelector("#alert-message").classList.remove("showAlertMessage");
-        }, 3000);
-        setTimeout(function(){
+        }, 6000);
+        clearMsg = setTimeout(function(){
             document.querySelector("#alert-message").innerHTML = "";
-        }, 4000);
+        }, 7000);
     }
 
     async function walletListener(provider, account){
@@ -78,8 +84,6 @@
 
         const contract = await createContract();
         const token = await createToken();
-        console.log(contract)
-        console.log(token)
         emitter.emit('accountChanged', {"account":account, "contract":contract, "token":token, "contract_address": contract_address});
     }
 
