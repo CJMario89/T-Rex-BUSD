@@ -194,11 +194,12 @@
             },
             mobileConnect: async function(){
                 var ua = navigator.userAgent.toLowerCase(); 
-                if (ua.indexOf('crios') == -1) { 
-                    this.WalletConnect();
-                }else{
-                    this.Metamask();
-                }
+                document.querySelector(".connectWallet").innerHTML = window.ethereum;
+                // if (ua.indexOf('crios') == -1) { 
+                //     this.WalletConnect();
+                // }else{
+                //     this.Metamask();
+                // }
             }
         }
     }
