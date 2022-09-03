@@ -12,7 +12,7 @@
             </span>
         </a>
         <a class="navbarC">WHITEPAPER</a>
-        <a class="navbarC">AUDIT</a>
+        <a class="navbarC" href="https://bscscan.com/address/0x86f27ceabafb726cd69fabc92f63ff4b03bd6212">AUDIT</a>
         <a class="navbarC">F & Q</a>
     </div>
 </template>
