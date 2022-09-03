@@ -42,7 +42,7 @@ export default {
             if(obj.account == ""){
                 this.connectWallet = "CONNECT WALLET"
             }else{
-                this.connectWallet = obj.account.slice(0, 7) + "......" + obj.account.slice(-5);
+                this.connectWallet = obj.account.slice(0, 6) + "......" + obj.account.slice(-4);
             }
             account = obj.account;
         });
