@@ -178,6 +178,9 @@ export default {
             this.wallet_balance = web3.utils.fromWei(data, "ether");
         },
         checkAllowance: async function(){
+            if(account == ""){
+                return;
+            }
             var allowAmount = await allowance(token, account, contract_address);
             this.approved_hint = `You have approved: ${web3.utils.fromWei(allowAmount)} BUSD`;
         }
