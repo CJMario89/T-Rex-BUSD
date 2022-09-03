@@ -69,6 +69,14 @@ export default {
             account = obj.account;
             this.get_referral_data();
             this.update_referral_address();
+            if(account == ""){
+                this.referral_reward = 0;
+                this.total_referral_withdrawn = 0;
+                this.referral = [
+                    {left: "Referral Reward", right: `${this.referral_reward}&ensp;BUSD`},
+                    {left: "Total Withdrawn", right: `${this.total_referral_withdrawn}&ensp;BUSD`}
+                ]
+            }
         });
         emitter.on("referral", ()=>{
             this.get_referral_data();

@@ -138,6 +138,7 @@
                     });
                     walletListener(window.ethereum, account);
                 }catch(e){
+                    remove_wait_page();
                     throw e;
                 }
                 remove_wait_page();
@@ -161,6 +162,7 @@
                     account = accounts[0];
                     walletListener(provider, account);
                 }catch(e){
+                    remove_wait_page();
                     throw e;
                 }
                 remove_wait_page();
@@ -185,6 +187,7 @@
                     walletListener(provider, account);
                     // walletListener(window.ethereum, account);
                 }catch(e){
+                    remove_wait_page();
                     console.log(e);
                 }
                 remove_wait_page();

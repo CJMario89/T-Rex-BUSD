@@ -76,6 +76,15 @@ export default {
             this.get_deposit_data();
             this.get_wallet_balance();
             this.checkAllowance();
+            if(account == ""){
+                this.wallet_balance = 0;
+                this.user_invested = 0, 
+                this.profit_5x = 0,
+                this.remaining_5x = 0;
+                this.daily_user_roi = 0;
+                this.approved_amount = 10;
+                this.deposit_amount = 10;
+            }
         });
         emitter.on("wallet_balance", ()=>{
             this.get_wallet_balance();
@@ -162,6 +171,9 @@ export default {
             this.daily_user_roi = web3.utils.fromWei(data[3]);
         },
         get_wallet_balance: async function(){
+            if(account == ""){
+                return;
+            }
             var data = await get_msg_wallet_balance(account, token);
             this.wallet_balance = web3.utils.fromWei(data, "ether");
         },

@@ -75,6 +75,15 @@ export default {
             contract = obj.contract;
             account = obj.account;
             this.get_statistics_data();
+            if(account == ""){
+                this.daily_reward = 0
+                this.last_claim = 0
+                this.next_claim = 0
+                this.available_withdraw = 0
+                this.last_withdraw = 0
+                this.next_withdraw = 0
+                this.total_withdrawn = 0;
+            }
         });
         emitter.on("deposit", ()=>{
             this.get_statistics_data();
