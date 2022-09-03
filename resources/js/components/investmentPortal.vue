@@ -133,10 +133,6 @@ export default {
                 return;
             }
             var allowAmount = await allowance(token, account, contract_address);
-            if(allowAmount < this.deposit_amount){
-                emitter.emit("alert",{"message":"Approved is not enough"});
-                return;
-            }
             if(this.deposit_amount < 10){
                 emitter.emit("alert",{"message":"deposit should be at least 10 BUSD"});
                 return;
@@ -145,6 +141,11 @@ export default {
                 emitter.emit("alert",{"message":"deposit should be below 100000 BUSD"});
                 return;
             }
+            if(allowAmount < this.deposit_amount){
+                emitter.emit("alert",{"message":"Approved is not enough"});
+                return;
+            }
+            
             emitter.emit("request", {"action": "Staking"});
             try{
                 await stake(contract, account, token, contract_address, this.referral_address, this.deposit_amount);
