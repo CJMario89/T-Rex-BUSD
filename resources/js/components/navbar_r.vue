@@ -16,9 +16,9 @@
         </div>
         <a class="navbarC" href="https://t.me/+cJ7UDQk4znJlNzZl">Telegram</a>
         <a class="navbarC connectWallet" @click="connect_wallet">{{connectWallet}}
-            <!-- <div class="disconnectContainer">
+            <div class="disconnectContainer">
                 <div class="disconnectWallet" @click.stop="disconnect">disconnect</div>
-            </div> -->
+            </div>
         </a>
     </div>
 </template>
@@ -62,20 +62,19 @@ export default {
                     }
                 }else{
                     emitter.emit("connect_wallet");
+                }            
+            }else{
+                document.querySelector(".disconnectWallet").style.display = "flex";
+                if(!disconnectedFlag){
+                    //
+                    window.addEventListener("click", function(e){
+                        if(e.target.closest(".connectWallet") == null && e.target.closest(".navbarC") == null){
+                            document.querySelector(".disconnectWallet").style.display = "none";
+                        }
+                    });
+                    disconnectedFlag = 1;
                 }
             }
-            // }else{
-            //     document.querySelector(".disconnectWallet").style.display = "flex";
-            //     if(!disconnectedFlag){
-            //         //
-            //         window.addEventListener("click", function(e){
-            //             if(e.target.closest(".connectWallet") == null){
-            //                 document.querySelector(".disconnectWallet").style.display = "none";
-            //             }
-            //         });
-            //         disconnectedFlag = 1;
-            //     }
-            // }
         },
 
         toggleLanguage: function(){
@@ -94,6 +93,7 @@ export default {
 
         disconnect: function(){
             document.querySelector(".disconnectWallet").style.display = "none";
+            window.localStorage.clear();
             emitter.emit("disconnect");
         }
     }
@@ -225,6 +225,26 @@ export default {
             background-color: #794DFD;
             text-align: center;
             border: 1px white solid;
+        }
+        .disconnectContainer{
+            position: absolute;
+            display: block;
+            top: 18vw;
+            right: 12vw;
+            height: 10%;
+        }
+        .disconnectWallet{
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            color: #F0BF13;
+            background-color: #794DFD;
+            font-size: 3vw;
+            padding: 0.5vw;
+            border-radius: 1vw;
         }
     }
     
