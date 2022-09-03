@@ -190,10 +190,11 @@
                 remove_wait_page();
             },
             mobileConnect: async function(){
-                try{
-                    this.Metamask();
-                }catch(e){
+                var ua = navigator.userAgent.toLowerCase(); 
+                if (ua.indexOf('safari') != -1 || ua.indexOf('chrome') != -1) { 
                     this.WalletConnect();
+                }else{
+                    this.Metamask();
                 }
             }
         }
