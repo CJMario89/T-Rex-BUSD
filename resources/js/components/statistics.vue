@@ -175,7 +175,7 @@ export default {
             if(ST[0] == false){//have claimed or not
                 this.last_claim = 0;
             }else{
-                this.last_claim = this.timeConverter(DR[1] - this.minuteToTimeStamp(1));
+                this.last_claim = this.timeConverter(DR[1] - this.dayToTimeStamp(1));
             }
 
 
@@ -187,7 +187,7 @@ export default {
             if(ST[1] == false){
                 this.last_withdraw = 0;
             }else{
-                this.last_withdraw = this.timeConverter(WC[2] - this.minuteToTimeStamp(5));
+                this.last_withdraw = this.timeConverter(WC[2] - this.dayToTimeStamp(7));
             }
         },
         dayToTimeStamp: function(day){
