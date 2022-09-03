@@ -152,6 +152,7 @@ export default {
                 emitter.emit("deposit");
                 await this.get_deposit_data();
                 await this.get_wallet_balance();
+                await this.checkAllowance();
                 emitter.emit("info");
                 emitter.emit("referral");
                 emitter.emit("alert",{"message":"Staked"});
