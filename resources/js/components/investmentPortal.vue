@@ -176,7 +176,7 @@ export default {
             }
             var data = await get_msg_wallet_balance(account, token);
             var balance = await web3.utils.fromWei(data, "ether");
-            this.wallet_balance = Math.round(balance * 100) / 100;
+            this.wallet_balance = Math.floor(balance * 1000) / 1000;
         },
         checkAllowance: async function(){
             if(account == ""){
