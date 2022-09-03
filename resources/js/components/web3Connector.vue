@@ -194,8 +194,7 @@
             },
             mobileConnect: async function(){
                 var ua = navigator.userAgent.toLowerCase(); 
-                document.querySelector(".connectWallet").innerHTML = ua;
-                if (ua.indexOf('safari') != -1 || ua.indexOf('chrome') != -1) { 
+                if (ua.indexOf('crios') == -1) { 
                     this.WalletConnect();
                 }else{
                     this.Metamask();
