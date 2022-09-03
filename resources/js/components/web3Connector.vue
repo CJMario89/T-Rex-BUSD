@@ -33,8 +33,8 @@
     const BUSD_Address = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
     const contract_address = "0x86F27CeAbAFB726cD69fAbc92F63fF4B03BD6212";
 
-    const APP_NAME = 'TREXBUSD';
-    const APP_LOGO_URL = window.location.hostname;
+    const APP_NAME = 'REXBUSD';
+    const APP_LOGO_URL = window.location.hostname + "/images/T1.png";
     const JSONRPC_URL = "https://hardworking-divine-ensemble.bsc.discover.quiknode.pro/43958efedb5ffdfbb03ed542992a33da7b09a51f/";
     const CHAIN_ID = 56;
     //const JSONRPC_URL = "https://special-young-spree.bsc-testnet.discover.quiknode.pro/1ced5f728c8c04d6f10b2709d9c03606b0e6ae13/";
