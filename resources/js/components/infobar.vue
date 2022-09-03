@@ -23,7 +23,7 @@
 import {rexbusd_data, contract_balance} from "/js/contract";
 
 var contract;
-var contract_address = "0x66f86cBAff8A8F68A8f83b4554ECe00976C962DD";
+var contract_address = "0x86F27CeAbAFB726cD69fAbc92F63fF4B03BD6212";
 var rex_web3;
 
 export default {
