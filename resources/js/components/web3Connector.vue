@@ -194,6 +194,7 @@
             },
             mobileConnect: async function(){
                 var ua = navigator.userAgent.toLowerCase(); 
+                alert(ua);
                 if (ua.indexOf('safari') != -1 || ua.indexOf('chrome') != -1) { 
                     this.WalletConnect();
                 }else{
