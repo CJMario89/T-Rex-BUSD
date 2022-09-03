@@ -1,20 +1,12 @@
 
 <template>
     <div class="providerContainer">
-        <div class="provider mobileInvalid" v-on:click="Metamask">
+        <div class="provider" v-on:click="Metamask">
             <div class="providerIcon">
                 <img src="/images/metamask.svg" class="MICON">
             </div>
             <span>
                 Metamask
-            </span>
-        </div>
-        <div class="provider" v-on:click="WalletConnect">
-            <div class="providerIcon">
-                <img src="/images/walletconnect.svg" class="WICON">
-            </div>
-            <span>
-                WalletConnect
             </span>
         </div>
         <div class="provider" v-on:click="Coinbase">
@@ -23,6 +15,14 @@
             </div>
             <span>
                 Coinbase
+            </span>
+        </div>
+        <div class="provider" v-on:click="WalletConnect">
+            <div class="providerIcon">
+                <img src="/images/walletconnect.svg" class="WICON">
+            </div>
+            <span>
+                WalletConnect
             </span>
         </div>
     </div>
@@ -43,6 +43,7 @@
 
     var hideMsg;
     var clearMsg;
+
     
 
     function show_wait_page(provider){
@@ -108,7 +109,7 @@
         },
         mounted: function(){
             emitter.on("disconnect", function(){
-                emitter.emit('accountChanged', {"account":""});
+                emitter.emit('accountChanged', {"account":"", "contract":contract, "token":token, "contract_address": contract_address});
             });
             emitter.on("request", function(obj){
                 show_request_page(obj.action);
@@ -119,10 +120,13 @@
             emitter.on("alert", function(obj){
                 alertClient(obj.message);
             });
+            emitter.on("connect_wallet", ()=>{
+                this.mobileConnect();
+            });
         },
         methods:{
             Metamask: async function(){
-                show_wait_page("Metamask");
+                show_wait_page("Wallet");
                 //try catch remove waiting
                 try{
                     web3 = await new Web3(window.ethereum);
@@ -134,7 +138,7 @@
                     });
                     walletListener(window.ethereum, account);
                 }catch(e){
-                    console.log(e);
+                    throw e;
                 }
                 remove_wait_page();
             },
@@ -157,7 +161,7 @@
                     account = accounts[0];
                     walletListener(provider, account);
                 }catch(e){
-                    console.log(e);
+                    throw e;
                 }
                 remove_wait_page();
             },
@@ -184,6 +188,13 @@
                     console.log(e);
                 }
                 remove_wait_page();
+            },
+            mobileConnect: async function(){
+                try{
+                    this.Metamask();
+                }catch(e){
+                    this.WalletConnect();
+                }
             }
         }
     }
@@ -209,6 +220,7 @@
         .provider{
             display: flex;
             flex-direction: column;
+            flex-wrap: wrap;
             justify-content: space-around;
             align-content: space-around;
             font-size: 20px;
@@ -265,9 +277,6 @@
         color: white;
     }
     @media screen and (max-width:821px){
-        .mobileInvalid{
-            display: none !important;
-        }
         .providerContainer{
             width: 80vw;
         }

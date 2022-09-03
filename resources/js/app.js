@@ -32,7 +32,7 @@ window.Vue = require('vue');
 // });
 
 import Web3 from "web3";
-import CoinbaseWalletProvider from "@coinbase/wallet-sdk";
+import CoinbaseWalletSDK from "@coinbase/wallet-sdk";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 window.WalletConnectProvider = WalletConnectProvider;
 import mitt from 'mitt';

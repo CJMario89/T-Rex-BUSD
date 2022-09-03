@@ -59,8 +59,8 @@ export default {
             profit_5x: 0,
             remaining_5x: 0,
             daily_user_roi: 0,
-            approved_amount: 50,
-            deposit_amount: 50,
+            approved_amount: 10,
+            deposit_amount: 10,
             approved_hint: ""
         }
     },
@@ -128,8 +128,8 @@ export default {
                 emitter.emit("alert",{"message":"Approved is not enough"});
                 return;
             }
-            if(this.deposit_amount < 50){
-                emitter.emit("alert",{"message":"deposit should be at least 50 BUSD"});
+            if(this.deposit_amount < 10){
+                emitter.emit("alert",{"message":"deposit should be at least 10 BUSD"});
                 return;
             }
             if(this.deposit_amount > 100000){

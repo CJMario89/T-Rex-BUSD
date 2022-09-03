@@ -16,9 +16,9 @@
         </div>
         <a class="navbarC" href="https://t.me/+cJ7UDQk4znJlNzZl">Telegram</a>
         <a class="navbarC connectWallet" @click="connect_wallet">{{connectWallet}}
-            <div class="disconnectContainer">
+            <!-- <div class="disconnectContainer">
                 <div class="disconnectWallet" @click.stop="disconnect">disconnect</div>
-            </div>
+            </div> -->
         </a>
     </div>
 </template>
@@ -50,27 +50,32 @@ export default {
     methods: {
         connect_wallet: async function(){
             if(account == ""){
-                document.querySelector(".providerContainer").style.display = "flex";
-                if(!connectedFlag){
-                    window.addEventListener("click", function(e){
-                        if(e.target.closest(".navbarC") == null){
-                            document.querySelector(".providerContainer").style.display = "none";
-                        }
-                    });
-                    connectedFlag = 1;
-                }
-            }else{
-                document.querySelector(".disconnectWallet").style.display = "flex";
-                if(!disconnectedFlag){
-                    //
-                    window.addEventListener("click", function(e){
-                        if(e.target.closest(".connectWallet") == null){
-                            document.querySelector(".disconnectWallet").style.display = "none";
-                        }
-                    });
-                    disconnectedFlag = 1;
+                if(window.innerWidth > 821){
+                    document.querySelector(".providerContainer").style.display = "flex";
+                    if(!connectedFlag){
+                        window.addEventListener("click", function(e){
+                            if(e.target.closest(".navbarC") == null){
+                                document.querySelector(".providerContainer").style.display = "none";
+                            }
+                        });
+                        connectedFlag = 1;
+                    }
+                }else{
+                    emitter.emit("connect_wallet");
                 }
             }
+            // }else{
+            //     document.querySelector(".disconnectWallet").style.display = "flex";
+            //     if(!disconnectedFlag){
+            //         //
+            //         window.addEventListener("click", function(e){
+            //             if(e.target.closest(".connectWallet") == null){
+            //                 document.querySelector(".disconnectWallet").style.display = "none";
+            //             }
+            //         });
+            //         disconnectedFlag = 1;
+            //     }
+            // }
         },
 
         toggleLanguage: function(){
