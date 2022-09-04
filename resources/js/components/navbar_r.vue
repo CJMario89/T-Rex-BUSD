@@ -175,7 +175,7 @@ export default {
             position: relative;
             justify-content: flex-start;
             align-items: center;
-            margin-top: 19.7vw;
+            margin-top: 19.8vw;
             width: 50vw;
         }
         .language{
