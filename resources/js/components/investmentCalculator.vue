@@ -11,7 +11,7 @@
                 <input class="ICInput inputBlock" type="number" placeholder="0" v-on:input="onChangeICInput" v-model="ICInput">
                 <div class="ICInputDes">
                     Amount of returns calculated on the basis of investment amount.<br>
-                    Note: Min investment is 50 BUSD & max amount of investment in 100k BUSD.
+                    Note: Min investment is 10 BUSD & max amount of investment in 100k BUSD.
                 </div>
             </div>
             <div style="padding-right:5vw">
@@ -26,12 +26,12 @@
     </div>
 </template>
 <script>
-var daily_return = 5, weekly_return = 35, monthly_return = 150;
+var daily_return = 1, weekly_return = 7, monthly_return = 30;
 export default {
     data() {
         return {
             returns:{},
-            ICInput: 50
+            ICInput: 10
         }
     },
     created() {
